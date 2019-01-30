@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
-import { Manager, Target, Popper } from "react-popper";
+import { Manager, Reference, Popper } from "react-popper";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -110,7 +110,7 @@ class HeaderLinks extends React.Component {
           </Hidden>
         </Button>
         <Manager className={managerClasses}>
-          <Target>
+          <Reference>
             <Button
               color="transparent"
               justIcon
@@ -139,7 +139,7 @@ class HeaderLinks extends React.Component {
                 </span>
               </Hidden>
             </Button>
-          </Target>
+          </Reference>
           <Popper
             placement="bottom-start"
             eventsEnabled={open}
