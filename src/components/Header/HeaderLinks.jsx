@@ -109,36 +109,130 @@ class HeaderLinks extends React.Component {
             </span>
           </Hidden>
         </Button>
-        <Manager className={managerClasses}>
+
+        <Manager>
           <Reference>
-            <Button
-              color="transparent"
-              justIcon
-              aria-label="Notifications"
-              aria-owns={open ? "menu-list" : null}
-              aria-haspopup="true"
-              onClick={this.handleClick}
-              className={rtlActive ? classes.buttonLinkRTL : classes.buttonLink}
-              muiClasses={{
-                label: rtlActive ? classes.labelRTL : ""
-              }}
-            >
-              <Notifications
+            {({ ref }) => (
+              <Button
+                ref={ref}
+                color={window.innerWidth > 959 ? "transparent" : "white"}
+                justIcon={window.innerWidth > 959}
+                simple={!(window.innerWidth > 959)}
+                aria-label="Notifications"
+                aria-owns={open ? "menu-list" : null}
+                aria-haspopup="true"
+                onClick={this.handleClick}
+                className={classes.buttonLink}
+              >
+                <Notifications className={classes.icons} />
+                <span className={classes.notifications}>5</span>
+                <Hidden mdUp>
+                  <p onClick={this.handleClick} className={classes.linkText}>
+                    Notification
+                  </p>
+                </Hidden>
+              </Button>
+            )}
+          </Reference>
+          <Popper
+            placement="bottom-end"
+            eventsEnabled={open}
+          >
+            {({ ref, style, placement, outOfBoundaries, scheduleUpdate, arrowProps }) => (
+              <div
+                ref={ref}
                 className={
-                  classes.headerLinksSvg +
-                  " " +
-                  (rtlActive
-                    ? classes.links + " " + classes.linksRTL
-                    : classes.links)
+                  classNames({ [classes.popperClose]: !open }, { [classes.popperResponsive]: true })
                 }
-              />
-              <span className={classes.notifications}>5</span>
-              <Hidden mdUp>
-                <span onClick={this.handleClick} className={classes.linkText}>
-                  {rtlActive ? "إعلام" : "Notification"}
-                </span>
-              </Hidden>
-            </Button>
+                style={{
+                  position: "absolute",
+                  willChange: "transform",
+                }}
+                data-placement={placement}
+              >
+                <ClickAwayListener onClickAway={this.handleClose}>
+                  <Grow
+                    in={open}
+                    id="menu-list"
+                    style={{ transformOrigin: "0 0 0" }}
+                  >
+                    <Paper className={classes.dropdown}>
+                      <MenuList role="menu">
+                        <MenuItem
+                          onClick={this.handleClose}
+                          className={classes.dropdownItem}
+                        >
+                          Mike John responded to your email
+                      </MenuItem>
+                        <MenuItem
+                          onClick={this.handleClose}
+                          className={classes.dropdownItem}
+                        >
+                          You have 5 new tasks
+                      </MenuItem>
+                        <MenuItem
+                          onClick={this.handleClose}
+                          className={classes.dropdownItem}
+                        >
+                          You're now friend with Andrew
+                      </MenuItem>
+                        <MenuItem
+                          onClick={this.handleClose}
+                          className={classes.dropdownItem}
+                        >
+                          Another Notification
+                      </MenuItem>
+                        <MenuItem
+                          onClick={this.handleClose}
+                          className={classes.dropdownItem}
+                        >
+                          Another One
+                      </MenuItem>
+                      </MenuList>
+                    </Paper>
+                  </Grow>
+                </ClickAwayListener>
+              </div>
+            )}
+          </Popper>
+        </Manager>
+        {/* <Manager className={managerClasses}>
+          <Reference>
+
+            { ({ref}) =>
+              (
+                <Button
+                  ref={ref}
+                  color="transparent"
+                  justIcon
+                  aria-label="Notifications"
+                  aria-owns={open ? "menu-list" : null}
+                  aria-haspopup="true"
+                  onClick={this.handleClick}
+                  className={rtlActive ? classes.buttonLinkRTL : classes.buttonLink}
+                  muiClasses={{
+                    label: rtlActive ? classes.labelRTL : ""
+                  }}
+                >
+                  <Notifications
+                    className={
+                      classes.headerLinksSvg +
+                      " " +
+                      (rtlActive
+                        ? classes.links + " " + classes.linksRTL
+                        : classes.links)
+                    }
+                  />
+                  <span className={classes.notifications}>5</span>
+                  <Hidden mdUp>
+                    <span onClick={this.handleClick} className={classes.linkText}>
+                      {rtlActive ? "إعلام" : "Notification"}
+                    </span>
+                  </Hidden>
+                </Button>
+              )
+            }
+            
           </Reference>
           <Popper
             placement="bottom-start"
@@ -149,56 +243,62 @@ class HeaderLinks extends React.Component {
               classes.pooperResponsive
             }
           >
-            <ClickAwayListener onClickAway={this.handleClose}>
-              <Grow
-                in={open}
-                id="menu-list"
-                style={{ transformOrigin: "0 0 0" }}
-              >
-                <Paper className={classes.dropdown}>
-                  <MenuList role="menu">
-                    <MenuItem
-                      onClick={this.handleClose}
-                      className={dropdownItem}
-                    >
-                      {rtlActive
-                        ? "إجلاء أوزار الأسيوي حين بل, كما"
-                        : "Mike John responded to your email"}
-                    </MenuItem>
-                    <MenuItem
-                      onClick={this.handleClose}
-                      className={dropdownItem}
-                    >
-                      {rtlActive
-                        ? "شعار إعلان الأرضية قد ذلك"
-                        : "You have 5 new tasks"}
-                    </MenuItem>
-                    <MenuItem
-                      onClick={this.handleClose}
-                      className={dropdownItem}
-                    >
-                      {rtlActive
-                        ? "ثمّة الخاصّة و على. مع جيما"
-                        : "You're now friend with Andrew"}
-                    </MenuItem>
-                    <MenuItem
-                      onClick={this.handleClose}
-                      className={dropdownItem}
-                    >
-                      {rtlActive ? "قد علاقة" : "Another Notification"}
-                    </MenuItem>
-                    <MenuItem
-                      onClick={this.handleClose}
-                      className={dropdownItem}
-                    >
-                      {rtlActive ? "قد فاتّبع" : "Another One"}
-                    </MenuItem>
-                  </MenuList>
-                </Paper>
-              </Grow>
-            </ClickAwayListener>
+          {({ref}) =>( 
+            <div ref={ref}>
+              <ClickAwayListener onClickAway={this.handleClose}>
+                <Grow
+                  in={open}
+                  id="menu-list"
+                  style={{ transformOrigin: "0 0 0" }}
+                >
+                  <Paper className={classes.dropdown}>
+                    <MenuList role="menu">
+                      <MenuItem
+                        onClick={this.handleClose}
+                        className={dropdownItem}
+                      >
+                        {rtlActive
+                          ? "إجلاء أوزار الأسيوي حين بل, كما"
+                          : "Mike John responded to your email"}
+                      </MenuItem>
+                      <MenuItem
+                        onClick={this.handleClose}
+                        className={dropdownItem}
+                      >
+                        {rtlActive
+                          ? "شعار إعلان الأرضية قد ذلك"
+                          : "You have 5 new tasks"}
+                      </MenuItem>
+                      <MenuItem
+                        onClick={this.handleClose}
+                        className={dropdownItem}
+                      >
+                        {rtlActive
+                          ? "ثمّة الخاصّة و على. مع جيما"
+                          : "You're now friend with Andrew"}
+                      </MenuItem>
+                      <MenuItem
+                        onClick={this.handleClose}
+                        className={dropdownItem}
+                      >
+                        {rtlActive ? "قد علاقة" : "Another Notification"}
+                      </MenuItem>
+                      <MenuItem
+                        onClick={this.handleClose}
+                        className={dropdownItem}
+                      >
+                        {rtlActive ? "قد فاتّبع" : "Another One"}
+                      </MenuItem>
+                    </MenuList>
+                  </Paper>
+                </Grow>
+              </ClickAwayListener>
+              </div>
+          )}
+            
           </Popper>
-        </Manager>
+        </Manager> */}
+        
         <Button
           color="transparent"
           aria-label="Person"

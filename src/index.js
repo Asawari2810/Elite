@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import indexReducer from './reducers/index';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import { createStore, applyMiddleware, compose } from '../../AppData/Local/Microsoft/TypeScript/3.2/node_modules/redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import {Router , Route,Switch} from 'react-router-dom';
 import indexRoutes from '../src/routes/index.jsx';
 import {createBrowserHistory} from 'history';

@@ -8,6 +8,7 @@ import GridContainer from '../components/Grid/GridContainer';
 import GridItem from '../components/Grid/GridItem';
 import {Link} from 'react-router-dom';
 import bgImage from "../../src/assets/img/register.jpeg";
+//import {Fingerprint} from '@material-ui/icons';
 
 class MainPage extends Component{
     render(){
@@ -18,9 +19,8 @@ class MainPage extends Component{
              <GridContainer justify="center">
                     <GridItem xs={15} sm={6} md={4}>
                     <Link to= {"/login"}>
-                    <Button color="primary" round className={classes.button}>
+                    <Button color="primary" round className={classes.button} >
                     Login
-                    <SendIcon className={classes.rightIcon}/>
                     </Button>
                     </Link>
                     <Link to={"/register"}>
