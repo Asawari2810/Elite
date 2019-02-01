@@ -15,15 +15,14 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 
 // @material-ui/icons
-import Dashboard from "@material-ui/icons/Dashboard";
+
 import Menu from "@material-ui/icons/Menu";
 
 // core components
-import Button from "components/CustomButtons/Button";
+import Button from "../CustomButtons/Button.jsx";
 
-import pagesRoutes from "routes/pages.jsx";
-
-import pagesHeaderStyle from "assets/jss/material-dashboard-pro-react/components/pagesHeaderStyle.jsx";
+import authRoutes from "../../routes/auth.jsx";
+import pagesHeaderStyle from "../../assets/jss/material-dashboard-pro-react/components/pagesHeaderStyle.jsx";
 
 class PagesHeader extends React.Component {
   constructor(props) {
@@ -51,19 +50,7 @@ class PagesHeader extends React.Component {
     });
     var list = (
       <List className={classes.list}>
-        <ListItem className={classes.listItem}>
-          <NavLink to={"/dashboard"} className={classes.navLink}>
-            <ListItemIcon className={classes.listItemIcon}>
-              <Dashboard />
-            </ListItemIcon>
-            <ListItemText
-              primary={"Dashboard"}
-              disableTypography={true}
-              className={classes.listItemText}
-            />
-          </NavLink>
-        </ListItem>
-        {pagesRoutes.map((prop, key) => {
+        {authRoutes.map((prop, key) => {
           if (prop.redirect) {
             return null;
           }
@@ -95,14 +82,14 @@ class PagesHeader extends React.Component {
           <Hidden smDown implementation="css">
             <div className={classes.flex}>
               <Button href="#" className={classes.title} color="transparent">
-                Material Dashboard Pro React
+                Elite Classes
               </Button>
             </div>
           </Hidden>
           <Hidden mdUp>
             <div className={classes.flex}>
               <Button href="#" className={classes.title} color="transparent">
-                MD Pro React
+                Elite Classes
               </Button>
             </div>
           </Hidden>

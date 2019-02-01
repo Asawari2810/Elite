@@ -9,6 +9,7 @@ const authRoute = [
         path: "/login",
         name : "Login Page",
         mini: "LP",
+        short : "Login",
         icon : Fingerprint,
         component : LoginPage
     } ,
@@ -16,24 +17,25 @@ const authRoute = [
         path : "/register",
         name : "Register Page",
         mini : "RP",
-        icon : Fingerprint,
+        short : "Register",
+        icon : PersonAdd,
         component : RegistrationPage
     },
-    {
-        path : "/dashboard",
-        name : "User Dsahboard",
-        mini : "UD",
-        icon : Fingerprint,
-        component :UserDashboard    
-    },
+    // {
+    //     path : "/dashboard",
+    //     name : "User Dsahboard",
+    //     mini : "UD",
+    //     icon : Fingerprint,
+    //     component :UserDashboard    
+    // },
 
-    {
-        path : "/main",
-        name : "Main Page",
-        mini : "MP",
-        icon : Fingerprint,
-        component : MainPage
-    },
+    // {
+    //     path : "/main",
+    //     name : "Main Page",
+    //     mini : "MP",
+    //     icon : Fingerprint,
+    //     component : MainPage
+    // },
     { redirect: true, path: "/", pathTo: "/main", name: "Main Page" ,component: MainPage}
 ];
 

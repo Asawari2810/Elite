@@ -24,20 +24,37 @@ import CustomInput from "../../components/CustomInput/CustomInput.jsx";
 import Button from "../../components/CustomButtons/Button.jsx";
 
 import headerLinksStyle from "../../assets/jss/material-dashboard-pro-react/components/headerLinksStyle";
+import {logout} from "../../actions/auth.jsx";
+
 
 class HeaderLinks extends React.Component {
   state = {
-    open: false
+    open: false,
+    userOpen : false
   };
   handleClick = () => {
     this.setState({ open: !this.state.open });
   };
+
+  handleUserClick = ()=>{
+    this.setState({ userOpen : !this.state.userOpen});
+  };
+
   handleClose = () => {
     this.setState({ open: false });
   };
+
+  handleUserClose = () =>{
+    this.setState({userOpen : false});
+  };
+
+  handleLogOut = () =>{
+    logout();
+  }
   render() {
     const { classes, rtlActive } = this.props;
     const { open } = this.state;
+    const {userOpen} = this.state
     const searchButton =
       classes.top +
       " " +
@@ -189,6 +206,8 @@ class HeaderLinks extends React.Component {
                           Another One
                       </MenuItem>
                       </MenuList>
+
+                     
                     </Paper>
                   </Grow>
                 </ClickAwayListener>
@@ -196,6 +215,102 @@ class HeaderLinks extends React.Component {
             )}
           </Popper>
         </Manager>
+
+        <Manager>
+          <Reference>
+            {({ ref }) => (
+              <Button
+                ref={ref}
+                color={window.innerWidth > 959 ? "transparent" : "white"}
+                justIcon={window.innerWidth > 959}
+                simple={!(window.innerWidth > 959)}
+                aria-label="Person"
+                aria-owns={open ? "user-list" : null}
+                aria-haspopup="true"
+                onClick={this.handleUserClick}
+                className={classes.buttonLink}
+              >
+
+                <Person
+                  className={
+                    classes.headerLinksSvg +
+                    " " +
+                    (rtlActive
+                      ? classes.links + " " + classes.linksRTL
+                      : classes.links)
+                  }
+                />
+                
+                <Hidden mdUp>
+                  <span className={classes.linkText}>
+                    {"Profile"}
+                  </span>
+                </Hidden>
+
+              </Button>
+            )}
+          </Reference>
+          <Popper
+            placement="bottom-end"
+            eventsEnabled={userOpen}
+          >
+            {({ ref, style, placement, outOfBoundaries, scheduleUpdate, arrowProps }) => (
+              <div
+                ref={ref}
+                className={
+                  classNames({ [classes.popperClose]: !userOpen }) + " "+
+                  classes.popperResponsive
+                }
+                style={{
+                  position: "absolute",
+                  willChange: "transform",
+                }}
+              >
+                <ClickAwayListener onClickAway={this.handleUserClose}>
+                  <Grow
+                    in={userOpen}
+                    id="user-list"
+                    style={{ transformOrigin: "0 0 0" }}
+                  >
+                    <Paper className={classes.dropdown}>
+                      <MenuList role="menu">
+                        <MenuItem
+                          onClick={this.handleUserClose}
+                          className={classes.dropdownItem}
+                        >
+                         {"Profile"}
+                      </MenuItem>
+
+                          <MenuItem
+                            onClick={this.handleLogOut}
+                            className={classes.dropdownItem}
+                          >
+                            {"Logout"}
+                          </MenuItem>
+                      </MenuList>
+
+
+                    </Paper>
+                  </Grow>
+                </ClickAwayListener>
+              </div>
+            )}
+          </Popper>
+        </Manager>
+
+
+
+
+
+      </div>
+    );
+  }
+}
+
+HeaderLinks.propTypes = {
+  classes: PropTypes.object.isRequired,
+  rtlActive: PropTypes.bool
+};
         {/* <Manager className={managerClasses}>
           <Reference>
 
@@ -299,38 +414,6 @@ class HeaderLinks extends React.Component {
           </Popper>
         </Manager> */}
         
-        <Button
-          color="transparent"
-          aria-label="Person"
-          justIcon
-          className={rtlActive ? classes.buttonLinkRTL : classes.buttonLink}
-          muiClasses={{
-            label: rtlActive ? classes.labelRTL : ""
-          }}
-        >
-          <Person
-            className={
-              classes.headerLinksSvg +
-              " " +
-              (rtlActive
-                ? classes.links + " " + classes.linksRTL
-                : classes.links)
-            }
-          />
-          <Hidden mdUp>
-            <span className={classes.linkText}>
-              {rtlActive ? "الملف الشخصي" : "Profile"}
-            </span>
-          </Hidden>
-        </Button>
-      </div>
-    );
-  }
-}
-
-HeaderLinks.propTypes = {
-  classes: PropTypes.object.isRequired,
-  rtlActive: PropTypes.bool
-};
+     
 
 export default withStyles(headerLinksStyle)(HeaderLinks);

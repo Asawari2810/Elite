@@ -46,6 +46,11 @@ export function signUp (values, history){
     }
 }
 
+export function logout(){
+    localStorage.clear();
+    //history.push('main');
+    window.location="/main";
+}
 export function registerUserSuccess(user) {
     return{
         type : auth.REGISTER_USER_SUCCESS,

@@ -36,6 +36,7 @@ class RegistrationPage extends Component {
     render() {
         const { classes, userLoading } = this.props;
         return (
+            <div className={classes.container}>
             <div className={classes.content}>
                 <GridContainer justify="center">
                     <GridItem xs={12} sm={6} md={4}>
@@ -65,7 +66,7 @@ class RegistrationPage extends Component {
                                         className={`${classes.cardHeader} ${classes.textCenter}`}
                                         color="rose"
                                     >
-                                        <h4 className={classes.cardTitle}>Sign-up</h4>
+                                        <h4 className={classes.cardTitle}>Sign Up</h4>
                                     </CardHeader>
                                     <CardBody>
 
@@ -169,10 +170,10 @@ class RegistrationPage extends Component {
                                         />
                                         <div>
                                         </div>
-                                        <div>
+                                        <div className={classes.textCenter}>
 
-                                            <Button color="rose" simple size="lg" block onClick={handleSubmit}>
-                                                Sign up
+                                            <Button color="rose" onClick={handleSubmit}>
+                                                Sign Up
                                         </Button>
 
                                         </div>
@@ -188,6 +189,7 @@ class RegistrationPage extends Component {
                         </Formik>
                     </GridItem>
                 </GridContainer>
+            </div>
             </div>
         );
     }

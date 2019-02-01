@@ -19,6 +19,13 @@ import { loginUser } from '../actions/auth.jsx';
 import GridContainer from '../components/Grid/GridContainer';
 import GridItem from '../components/Grid/GridItem';
 import CardHeader from "../components/Card/CardHeader.jsx";
+import {css} from 'emotion';
+
+const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+`;
 
 class LoginPage extends Component {
   constructor(props) {
@@ -47,9 +54,9 @@ class LoginPage extends Component {
               validationSchema={loginSchema}
               onSubmit={values => {
                 console.log(values)
-                this.setState({loginEmail : values.loginEmail})
-                this.setState({loginPassword : values.loginPassword})
-                this.props.loginUser(this.state, this.props.history)
+                // this.setState({loginEmail : values.loginEmail})
+                // this.setState({loginPassword : values.loginPassword})
+                this.props.loginUser(values, this.props.history)
               }}
               render={({ handleSubmit, handleChange, values, errors }) => (
 
@@ -61,7 +68,7 @@ class LoginPage extends Component {
                   <h4 className={classes.cardTitle}> Login</h4>
                   </CardHeader>
                     <CardBody>
-                      <CustomInput
+                      <CustomInput  
                         onChange={handleChange}
                         labelText="Email..."
                         name="loginEmail"
@@ -97,21 +104,20 @@ class LoginPage extends Component {
                               <LockOutlined
                                 className={classes.inputAdornmentIcon}
                               />
-                            </InputAdornment>
+                            </InputAdornment> 
                           )
                         }}
                       />
-                      <div>
+                      <div className={classes.textCenter}>
                         
-                        <Button color="rose" simple size="lg" block onClick={handleSubmit}>
-                          Submit
+                        <Button color="rose"  round  onClick={handleSubmit}>
+                          Login
                         </Button>
                        
-                      </div>
-                      <div>
+                     
                         <Link to={'/register'}>
-                        <Button color="rose" simple size="lg" block>
-                          Register as new User
+                        <Button color="rose" round>
+                          Sign Up
                         </Button>
                         </Link>
 
