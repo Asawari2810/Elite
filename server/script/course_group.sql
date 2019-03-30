@@ -1,7 +1,7 @@
-CREATE TABLE IF NOT EXISTS `subject` (
+CREATE TABLE IF NOT EXISTS `course_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `group_name`  int(11) NOT NULL,
-  `subject_name` varchar(255) NOT NULL,
+  `course_id`  int(11) NOT NULL,
+  `group_name` varchar(1024)  NULL,
   `create_date` datetime DEFAULT CURRENT_TIMESTAMP NULL,
   `update_date` datetime ON UPDATE CURRENT_TIMESTAMP NULL,
   `created_by` varchar(1024)  NULL,
