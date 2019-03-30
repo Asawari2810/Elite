@@ -54,12 +54,13 @@ class userService {
                         if (err) {
                             reject(err);
                         } else if (data && data.length > 0) {
+                            console.log("data----", data[0])
                             let hasPass = data[0].password;
                             let user = new User(data[0]);
                             console.log("user---", user)
                             let cs = bcrypt.compareSync(password, hasPass);
                             if (cs) {
-                                if (!user.is_verified) {
+                                if (!user.isVerified) {
                                     reject({ "msg": "USER_INACTIVE" })
                                 } else {
                                     user['token'] = userService.getJWTToken(user);
