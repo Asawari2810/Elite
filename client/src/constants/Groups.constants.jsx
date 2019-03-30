@@ -1,0 +1,6 @@
+
+export const groups = {
+    GROUPS_LOADING : 'GROUPS_LOADING',
+    GROUPS_SUCCESS : 'GROUPS_SUCCESS',
+    GROUPS_FAILURE : 'GROUPS_FAILURE'
+}
