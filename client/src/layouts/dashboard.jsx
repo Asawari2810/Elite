@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import dashboardRoutes from "../routes/dashboard.jsx";
+import { dashboardRoutes, otherRoutes } from "../routes/dashboard.jsx";
 import {Route, Switch ,Redirect} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -102,7 +102,7 @@ class Dashboard extends Component {
 
 const switchRoutes = (
     <Switch>
-        {dashboardRoutes.map((props,key) => {
+        {[...otherRoutes, ...dashboardRoutes].map((props,key) => {
             if(props.redirect){
                 return <Redirect to={props.path} from={props.pathTo} key={key}/>;
             }

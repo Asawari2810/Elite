@@ -6,13 +6,18 @@ import { Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { fetchGroups } from '../actions/groups.action';
+import Card from "../components/Card/Card.jsx";
+import CardBody from '../components/Card/CardBody.jsx';
+import CardHeader from "../components/Card/CardHeader.jsx";
+import { Link} from 'react-router-dom';
+import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
     button: {
-      margin: theme.spacing.unit,
+        margin: theme.spacing.unit,
     },
     input: {
-      display: 'none',
+        display: 'none',
     },
     progress: {
         margin: theme.spacing.unit * 2,
@@ -33,23 +38,73 @@ class Groups extends Component {
             groupsError
         } = this.props;
 
-        if(groupsLoading &&  !groupsDetails.length) {
-            return(
-                <CircularProgress className={classes.progress} />
+        if (groupsLoading && !groupsDetails.length) {
+            return (
+                <div>
+                    <div><h6>Loading</h6></div>
+                    <CircularProgress className={classes.progress} /></div>
             )
-        } 
+        }
 
-        if(groupsError && !groupsDetails.length) {
-            return(
+        if (groupsError && !groupsDetails.length) {
+            return (
                 <div><h6>Hard luck</h6></div>
             )
         }
 
+        // if(groupsDetails && groupsDetails.groups) {
+        //     return(
+        //     groupsDetails.groups.map((data,index) => {
+        //         return (
+        //             <div >
+        //                 <h1>{data.name}</h1>
+        //             </div>
+        //         )
+        //     })
+        // )
+        // }
+
         return (
-            <div >
-                <h1></h1>
-            </div>
+            groupsDetails.map((data, index) => {
+                return (
+                    <div >
+                        <Card login>
+                            <CardHeader
+                                className={`${classes.cardHeader} ${classes.textCenter}`}
+                                color="rose"
+                            >
+                                <h2 className={classes.cardTitle}> {data.name}</h2>
+                            </CardHeader>
+                            <CardBody>
+                                
+                                    {data.subjects.map((subject, index) => {
+                                        return (
+                                            <div>
+                                                <Typography>
+                                                <label><h4>{subject.name}</h4></label>
+                                                <Link to={`/modalList/${subject.subject_id}`}>
+                                                    <h4>Modal Paper</h4>
+                                                </Link>
+                                                <Link to='/ChapterTest'>
+                                                    <h4>Chapter Test</h4>
+                                                </Link>
+                                                <Link to='/FullTest'>
+                                                    <h4>Full Test</h4>
+                                                </Link>
+
+                                                </Typography>
+                                            </div>
+                                        )
+                                    })}
+                                
+                                
+                            </CardBody>
+                        </Card>
+                    </div>
+                )
+            })
         )
+
     }
 }
 
@@ -69,4 +124,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default compose(withStyles(styles), connect(mapStateToProps, mapDispatchToProps)) (Groups);
+export default compose(withStyles(styles), connect(mapStateToProps, mapDispatchToProps))(Groups);

@@ -7,6 +7,7 @@ var  indexRoutes = [
     {path : '/register' , name :'Auth' , component : Auth},
     {path : '/dashboard' , name : 'Dashboard', component : Dashboard },
     { path: '/groups', name: 'Dashboard', component: Dashboard},
+    { path: '/modalList/:id', name: 'Dashboard', component: Dashboard},
     {path : '/' , name:'Auth' , component : Auth}
 ];
 

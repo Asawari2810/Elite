@@ -1,8 +1,8 @@
-import { groups } from '../constants/Groups.constants';
+import { modal } from '../constants/ModalPaper.constants';
 import { API_ROOT, URI } from '../config/config';
 import { StringFormat } from '../utils/StringFormat';
 
-export const fetchGroups = (course_id, history) => {
+export const fetchModalPaperList = (subject_id, history) => {
     localStorage.setItem('token', "abc");
     //let token = JSON.parse(localStorage.getItem('user')).token;
     let token = localStorage.getItem('token');
@@ -11,8 +11,8 @@ export const fetchGroups = (course_id, history) => {
     console.log("token---", token)
     return (dispatch) => {
         if(token!=null) {
-            dispatch({ type: groups.GROUPS_LOADING })
-            fetch(StringFormat(API_ROOT + URI.GROUPS, course_id), {
+            dispatch({ type: modal.MODAL_LIST_LOADING })
+            fetch(StringFormat(API_ROOT + URI.MODAL_LIST, subject_id), {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -21,7 +21,7 @@ export const fetchGroups = (course_id, history) => {
             })
             .then(res => res.json())
             .then(data => {
-                console.log("groups dta", data);
+                console.log("modal dta", data);
                 // if(data.detail === 'Signature has expired.') {
                 //     dispatch({
                 //         type: collection.MY_COLLECTION_FAILURE,
@@ -30,13 +30,13 @@ export const fetchGroups = (course_id, history) => {
                 //      return history.push('/login')
                 // }
                 dispatch({
-                    type: groups.GROUPS_SUCCESS,
-                    payload: data.groups
+                    type: modal.MODAL_LIST_SUCCESS,
+                    payload: data
                 })
             })
             .catch(err => {
                 dispatch({
-                    type: groups.GROUPS_FAILURE,
+                    type: modal.MODAL_LIST_FAILURE,
                     payload: err
                 })
             })
