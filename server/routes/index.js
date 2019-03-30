@@ -12,9 +12,14 @@ const feedRouter = require('../routes/feedRoutes');
 const commentRouter = require('../routes/commentRoutes');
 const socialAuthRouter = require('../routes/socialAuthRouter');
 const subscriberRouter = require('../routes/subscribeRoutes');
+
+const courseRouter = require('./courseRoute');
+
 router.get('/ping', (req, res) =>
   res.send('pong')
 );
+
+router.use('/course', courseRouter);
 
 
 router.use('/user', userRoutes);
