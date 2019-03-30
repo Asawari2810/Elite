@@ -15,6 +15,7 @@ const subscriberRouter = require('../routes/subscribeRoutes');
 
 const courseRouter = require('./courseRoute');
 const groupRouter = require('./groupRoutes');
+const subjectRouter = require('./subjectRoutes');
 
 router.get('/ping', (req, res) =>
   res.send('pong')
@@ -22,6 +23,7 @@ router.get('/ping', (req, res) =>
 
 router.use('/course', courseRouter);
 router.use('/group', groupRouter);
+router.use('/subject', subjectRouter);
 
 router.use('/user', userRoutes);
 router.use('/userprofile', userProfileRoutes);
