@@ -31,7 +31,7 @@ export const fetchGroups = (course_id, history) => {
                 // }
                 dispatch({
                     type: groups.GROUPS_SUCCESS,
-                    payload: data
+                    payload: data.groups
                 })
             })
             .catch(err => {
