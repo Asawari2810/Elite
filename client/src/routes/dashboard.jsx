@@ -4,6 +4,8 @@ import Subjects from "../view/Subjects.jsx";
 import Groups from '../view/Groups.jsx';
 import ModalPaperList from '../view/ModalPaperList';
 
+import Courses from '../admin/views/Courses';
+
 const demoRoutes = [];
 export const dashboardRoutes = [
     {
@@ -12,6 +14,17 @@ export const dashboardRoutes = [
         mini: "UD",
         icon: Dashboard,
         component: Groups,
+       // collapse : "true"
+    }
+];
+
+export const adminDashboardRoutes = [
+    {
+        path: "/admin/courses",
+        name: "Courses",
+        mini: "UD",
+        icon: Dashboard,
+        component: Courses,
        // collapse : "true"
     }
 ];
