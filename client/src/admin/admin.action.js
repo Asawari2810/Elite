@@ -1,4 +1,4 @@
-import { groups } from '../constants/Groups.constants';
+import { admin } from './admin.constants';
 import { API_ROOT, URI } from '../config/config';
 import { StringFormat } from '../utils/StringFormat';
 
@@ -11,8 +11,8 @@ export const fetchCourses = (history) => {
     console.log("token---", token)
     return (dispatch) => {
         if(token!=null) {
-            dispatch({ type: groups.GROUPS_LOADING })
-            fetch(StringFormat(API_ROOT + URI.GROUPS, course_id), {
+            dispatch({ type: admin.COURSES_LOADING })
+            fetch(StringFormat(API_ROOT + URI.GET_COURSES), {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -21,7 +21,7 @@ export const fetchCourses = (history) => {
             })
             .then(res => res.json())
             .then(data => {
-                console.log("groups dta", data);
+                console.log("admin dta", data);
                 // if(data.detail === 'Signature has expired.') {
                 //     dispatch({
                 //         type: collection.MY_COLLECTION_FAILURE,
@@ -30,13 +30,13 @@ export const fetchCourses = (history) => {
                 //      return history.push('/login')
                 // }
                 dispatch({
-                    type: groups.GROUPS_SUCCESS,
-                    payload: data.groups
+                    type: admin.COURSES_SUCCESS,
+                    payload: data
                 })
             })
             .catch(err => {
                 dispatch({
-                    type: groups.GROUPS_FAILURE,
+                    type: admin.COURSES_FAILURE,
                     payload: err
                 })
             })
