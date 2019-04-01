@@ -1,9 +1,9 @@
 const DB = require('../util/db');
-const Course = require('../model/course');
+const Chapter = require('../model/chapter');
 
-class CourseService {
+class ChapterService {
 
-    static addCourse(course) {
+    static addChapter(chapter) {
         return new Promise((resolve, reject) => {
             var connection;
             var insertedId;
@@ -12,9 +12,9 @@ class CourseService {
                 return DB.beginTransaction(connection);
             })
                 .then(() => {
-                    course = DB.addAttributesForNew(course);
+                    chapter = DB.addAttributesForNew(chapter);
                     connection.query(
-                        `INSERT INTO course SET ?`, course, (err, data) => {
+                        `INSERT INTO chapter SET ?`, chapter, (err, data) => {
                             if (err) {
                                 DB.rollbackTransaction(connection);
                                 DB.release(connection);
@@ -22,8 +22,8 @@ class CourseService {
                             } else {
                                 insertedId = data.insertId;
                                 DB.commitTransaction(connection).then(() => {
-                                    CourseService.getCourseByID(insertedId).then(course => {
-                                        resolve(course);
+                                    ChapterService.getChapterByID(insertedId).then(chapter => {
+                                        resolve(chapter);
                                     })
                                 })
                             }
@@ -36,21 +36,21 @@ class CourseService {
         })
     }
 
-    static getCourseByID(id) {
+    static getChapterByID(id) {
         return new Promise((resolve, reject) => {
             var connection;
             DB.getConnection().then((conn) => {
                 connection = conn;
-                connection.query('select * from course where id = ? ', [id], (err, data) => {
+                connection.query('select * from chapter where id = ? ', [id], (err, data) => {
                     DB.release(connection);
                     if (err) {
                         reject(err);
                     } else {
-                        let course = {};
+                        let chapter = {};
                         if (data && data.length > 0) {
-                            course = new Course(data[0]);
+                            chapter = new Chapter(data[0]);
                         }
-                        resolve(course);
+                        resolve(chapter);
                     }
                 })
             })
@@ -59,4 +59,4 @@ class CourseService {
 
 }
 
-module.exports = CourseService;
+module.exports = ChapterService;
