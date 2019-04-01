@@ -8,6 +8,7 @@ var  indexRoutes = [
     {path : '/dashboard' , name : 'Dashboard', component : Dashboard },
     { path: '/groups', name: 'Dashboard', component: Dashboard},
     { path: '/modalList/:id', name: 'Dashboard', component: Dashboard},
+    { path: '/fullTestList', name: 'Dashboard', component: Dashboard},
     {path : '/' , name:'Auth' , component : Auth}
 ];
 
