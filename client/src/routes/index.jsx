@@ -1,7 +1,9 @@
 import Auth from '../layouts/auth.jsx';
 import Dashboard from '../layouts/dashboard.jsx';
+import AdminDashboard from '../layouts/adminDashboard';
 
 var  indexRoutes = [
+    { path: '/admin/courses', component: AdminDashboard},
 
     {path : '/login', name: 'Auth' ,component : Auth },
     {path : '/register' , name :'Auth' , component : Auth},
