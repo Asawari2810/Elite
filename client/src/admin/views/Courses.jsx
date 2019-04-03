@@ -49,6 +49,10 @@ class Courses extends Component {
         this.props.addCourse(values, this.props.history);
     }
 
+    onCourseClick = (course_id) => {
+        this.props.history.push('/admin/courseDetails/' + course_id)
+    }
+
     render() {
 
         const {
@@ -88,13 +92,14 @@ class Courses extends Component {
 
                 {coursesLoading ? <CircularProgress className={classes.progress} /> : null}
                 {coursesError ? <div><h6>Hard luck</h6></div> : null}
+                {coursesList.length>0 ? 
                 <div>
                     <h4>All Courses</h4>
                     {
                         coursesList.map((data, index) => {
                             return (
                                 <div >
-                                    <Card login>
+                                    <Card onClick={() => this.onCourseClick(data.id)}>
                                         <CardHeader
                                             className={`${classes.cardHeader} ${classes.textCenter}`}
                                         >
@@ -105,7 +110,7 @@ class Courses extends Component {
                             )
                         })
                     }
-                </div>
+                </div>: null}
             </div>
         )
 
