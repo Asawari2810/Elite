@@ -24,6 +24,16 @@ class CourseController {
         }) 
     }
 
+    static getAllCource(req,res){
+        courseService.getCourseByID().then( (course ) =>{
+            res.send(course);
+        })
+        .catch(err => {
+            res.status(500);
+            res.send(err);
+        }) 
+    }
+
 
 }
 
