@@ -73,6 +73,8 @@ class GroupService {
                                 group = new Group(item);
                                 return group
                             })
+                        } else {
+                            groups = []
                         }
                         resolve(groups);
                     }
