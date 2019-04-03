@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
-import Button from '@material-ui/core/Button';
+import { TextField, Button } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import {  fetchCourses } from '../admin.action';
+import { fetchCourses, addCourse } from '../admin.action';
 import Card from "../../components/Card/Card.jsx";
 import CardBody from '../../components/Card/CardBody.jsx';
 import CardHeader from "../../components/Card/CardHeader.jsx";
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
@@ -22,11 +22,31 @@ const styles = theme => ({
     progress: {
         margin: theme.spacing.unit * 2,
     },
+    textField: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+    },
 });
 class Courses extends Component {
 
+    state = {
+        addCourse: false,
+        course_name: null
+    }
+
     componentDidMount() {
         this.props.fetchCourses(this.props.history);
+    }
+
+    handleAddCourse = () => {
+        this.setState({ addCourse: true })
+    }
+
+    handleSubmitCourse = () => {
+        let values = {
+            course_name: this.state.course_name
+        }
+        this.props.addCourse(values, this.props.history);
     }
 
     render() {
@@ -38,71 +58,55 @@ class Courses extends Component {
             coursesError
         } = this.props;
 
-        if (coursesLoading && !coursesList.length) {
-            return (
-                <div>
-                    <div><h6>Loading</h6></div>
-                    <CircularProgress className={classes.progress} /></div>
-            )
-        }
-
-        if (coursesError && !coursesList.length) {
-            return (
-                <div><h6>Hard luck</h6></div>
-            )
-        }
-
-        // if(coursesList && coursesList.courses) {
-        //     return(
-        //     coursesList.courses.map((data,index) => {
-        //         return (
-        //             <div >
-        //                 <h1>{data.name}</h1>
-        //             </div>
-        //         )
-        //     })
-        // )
-        // }
-
         return (
-            coursesList.map((data, index) => {
-                return (
-                    <div >
-                        <Card login>
-                            <CardHeader
-                                className={`${classes.cardHeader} ${classes.textCenter}`}
-                                color="rose"
-                            >
-                                <h2 className={classes.cardTitle}> {data.name}</h2>
-                            </CardHeader>
-                            <CardBody>
-                                
-                                    {data.subjects.map((subject, index) => {
-                                        return (
-                                            <div>
-                                                <Typography>
-                                                <label><h4>{subject.name}</h4></label>
-                                                <Link to='/ModalPaper'>
-                                                    <h4>Modal Paper</h4>
-                                                </Link>
-                                                <Link to='/ChapterTest'>
-                                                    <h4>Chapter Test</h4>
-                                                </Link>
-                                                <Link to='/FullTest'>
-                                                    <h4>Full Test</h4>
-                                                </Link>
+            <div>
+                {
+                    this.state.addCourse 
+                    ?
+                    (<div>
+                        <TextField
+                                    id="course_name"
+                                    label="Title"
+                                    className={classes.textField}
+                                    type="text"
+                                    name="course_name"
+                                    margin="normal"
+                                    variant="outlined"
+                                    onChange={(e) => this.setState({ course_name: e.target.value})}
+                        />
+                        <Button className={classes.button} variant="contained" color="primary" onClick={this.handleSubmitCourse}>
+                            Submit
+                        </Button>
+                    </div>) :
+                    (<div>
+                        <Button variant="contained" color="primary" onClick={this.handleAddCourse}>
+                            Add New Course
+                        </Button>
+                    </div>)
+                }
 
-                                                </Typography>
-                                            </div>
-                                        )
-                                    })}
-                                
-                                
-                            </CardBody>
-                        </Card>
-                    </div>
-                )
-            })
+
+                {coursesLoading ? <CircularProgress className={classes.progress} /> : null}
+                {coursesError ? <div><h6>Hard luck</h6></div> : null}
+                <div>
+                    <h4>All Courses</h4>
+                    {
+                        coursesList.map((data, index) => {
+                            return (
+                                <div >
+                                    <Card login>
+                                        <CardHeader
+                                            className={`${classes.cardHeader} ${classes.textCenter}`}
+                                        >
+                                            <h2 className={classes.cardTitle}> {data.courseName}</h2>
+                                        </CardHeader>
+                                    </Card>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+            </div>
         )
 
     }
@@ -121,6 +125,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchCourses: (history) => dispatch(fetchCourses(history)),
+        addCourse: (values, history) => dispatch(addCourse(values, history))
     }
 }
 
