@@ -71,7 +71,7 @@ class CourseService {
                         if (data && data.length > 0) {
                             courses = data.map(item => {
                                 let course;
-                                course = new Question(item);
+                                course = new Course(item);
                                 return course
                             })
                         }
