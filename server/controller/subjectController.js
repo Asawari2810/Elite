@@ -23,6 +23,16 @@ class SubjectController {
             res.send(err);
         }) 
     }
+
+    static getAllSubject(req,res){
+        subjectService.getAllSubject().then( (subject ) =>{
+            res.send(subject);
+        })
+        .catch(err => {
+            res.status(500);
+            res.send(err);
+        }) 
+    }
 }
 
 module.exports = SubjectController;

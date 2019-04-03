@@ -56,6 +56,31 @@ class SubjectService {
             })
         })
     }
+
+    static getAllSubject() {
+        return new Promise((resolve, reject) => {
+            var connection;
+            DB.getConnection().then((conn) => {
+                connection = conn;
+                connection.query('select * from subject', [], (err, data) => {
+                    DB.release(connection);
+                    if (err) {
+                        reject(err);
+                    } else {
+                        let subjects;
+                        if (data && data.length > 0) {
+                            subjects = data.map(item => {
+                                let subject;
+                                subject = new Subject(item);
+                                return subject
+                            })
+                        }
+                        resolve(subjects);
+                    }
+                })
+            })
+        })
+    }
 }
 
 module.exports = SubjectService;
