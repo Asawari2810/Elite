@@ -25,7 +25,7 @@ class CourseController {
     }
 
     static getAllCource(req,res){
-        courseService.getCourseByID().then( (course ) =>{
+        courseService.getAllCourse().then( (course ) =>{
             res.send(course);
         })
         .catch(err => {
