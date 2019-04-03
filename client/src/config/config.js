@@ -4,5 +4,6 @@ export const URI = {
     GROUPS: 'groups',
     MODAL_LIST: 'modalList',
     GET_COURSES: 'course',
-    ADD_COURSE: 'course'
+    ADD_COURSE: 'course',
+    GET_GROUPS: 'group',
 }
