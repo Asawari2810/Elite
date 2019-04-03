@@ -27,6 +27,18 @@ class UserFullTestController {
             res.send(err);
         }) 
     }
+
+    static getFullTestScore(req,res){
+        let id = req.params['subjectId'];
+        let userId  = req.body['appUser']['id'];
+        userFullTestService.getFullTestScore(id, userId).then( (user ) =>{
+            res.send(user);
+        })
+        .catch(err => {
+            res.status(500);
+            res.send(err);
+        }) 
+    }
 }
 
 module.exports = UserFullTestController;
