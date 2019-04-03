@@ -57,6 +57,31 @@ class CourseService {
         })
     }
 
+    static getAllCourse() {
+        return new Promise((resolve, reject) => {
+            var connection;
+            DB.getConnection().then((conn) => {
+                connection = conn;
+                connection.query('select * from course', [], (err, data) => {
+                    DB.release(connection);
+                    if (err) {
+                        reject(err);
+                    } else {
+                        let courses;
+                        if (data && data.length > 0) {
+                            courses = data.map(item => {
+                                let course;
+                                course = new Question(item);
+                                return course
+                            })
+                        }
+                        resolve(courses);
+                    }
+                })
+            })
+        })
+    }
+
 }
 
 module.exports = CourseService;
