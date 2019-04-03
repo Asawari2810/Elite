@@ -90,3 +90,47 @@ export const addCourse = (values, history) => {
         }
     }
 }
+
+export const fetchGroups = (course_id, history) => {
+    localStorage.setItem('token', "abc");
+    //let token = JSON.parse(localStorage.getItem('user')).token;
+    let token = localStorage.getItem('token');
+    console.log(token,"token");
+    //let id = JSON.parse(localStorage.getItem('user')).id
+    console.log("token---", token)
+    return (dispatch) => {
+        if(token!=null) {
+            dispatch({ type: admin.GROUPS_LOADING })
+            fetch(StringFormat(API_ROOT + URI.GET_GROUPS), {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                // 'token': token
+            },
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log("admin dta", data);
+                // if(data.detail === 'Signature has expired.') {
+                //     dispatch({
+                //         type: collection.MY_COLLECTION_FAILURE,
+                //         payload: data
+                //     })
+                //      return history.push('/login')
+                // }
+                dispatch({
+                    type: admin.GROUPS_SUCCESS,
+                    payload: data
+                })
+            })
+            .catch(err => {
+                dispatch({
+                    type: admin.GROUPS_FAILURE,
+                    payload: err
+                })
+            })
+        } else{
+            history.push('/login');
+        }
+    }
+}
