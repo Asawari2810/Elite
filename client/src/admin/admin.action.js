@@ -66,7 +66,7 @@ export const addCourse = (values, history) => {
             })
             .then(res => res.json())
             .then(data => {
-                console.log("admin dta", data);
+                console.log("course dta", data);
                 // if(data.detail === 'Signature has expired.') {
                 //     dispatch({
                 //         type: collection.MY_COLLECTION_FAILURE,

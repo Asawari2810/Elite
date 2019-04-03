@@ -88,6 +88,7 @@ class Courses extends Component {
 
                 {coursesLoading ? <CircularProgress className={classes.progress} /> : null}
                 {coursesError ? <div><h6>Hard luck</h6></div> : null}
+                {coursesList.length>0 ? 
                 <div>
                     <h4>All Courses</h4>
                     {
@@ -105,7 +106,7 @@ class Courses extends Component {
                             )
                         })
                     }
-                </div>
+                </div>: null}
             </div>
         )
 
