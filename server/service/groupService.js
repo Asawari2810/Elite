@@ -56,6 +56,30 @@ class GroupService {
             })
         })
     }
+    static getAllGroup() {
+        return new Promise((resolve, reject) => {
+            var connection;
+            DB.getConnection().then((conn) => {
+                connection = conn;
+                connection.query('select * from course_group', [], (err, data) => {
+                    DB.release(connection);
+                    if (err) {
+                        reject(err);
+                    } else {
+                        let groups;
+                        if (data && data.length > 0) {
+                            groups = data.map(item => {
+                                let group;
+                                group = new Group(item);
+                                return group
+                            })
+                        }
+                        resolve(groups);
+                    }
+                })
+            })
+        })
+    }
 }
 
 module.exports = GroupService;

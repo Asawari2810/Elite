@@ -7,6 +7,7 @@ const subjectRouter = require('./subjectRoutes');
 const questionRouter = require('./questionRoutes');
 const chapterRouter = require('./chapterRoutes');
 const userChapterTestRouter = require('./userChapterTestRoutes');
+const userFullTestRouter = require('./userFullTestRoutes');
 
 router.get('/ping', (req, res) =>
   res.send('pong')
@@ -19,5 +20,6 @@ router.use('/user', userRoutes);
 router.use('/question', questionRouter);
 router.use('/chapter', chapterRouter);
 router.use('/chaptertest', userChapterTestRouter);
+router.use('/fulltest', userFullTestRouter);
 
 module.exports = router;
