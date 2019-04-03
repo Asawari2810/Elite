@@ -8,6 +8,10 @@ const initialState = {
     newCourse: [],
     newCourseLoading: false,
     newCourseError: null,
+
+    groupsList: [],
+    groupsLoading: false,
+    groupsError: null,
 }
 
 const reducer = (state = initialState, action) =>{
@@ -30,6 +34,13 @@ const reducer = (state = initialState, action) =>{
             }
     case admin.ADD_COURSE_FAILURE: 
         return { ...state, newCourse: [], newCourseError: action.payload, newCourseLoading: false }
+
+    case admin.GROUPS_LOADING: 
+        return { ...state, groupsLoading: true }
+    case admin.GROUPS_SUCCESS:
+        return { ...state, groupsList: state.groupsList.concat(action.payload), groupsLoading: false }
+    case admin.GROUPS_FAILURE: 
+        return { ...state, groupsList: [], groupsError: action.payload, groupsLoading: false }
 
     default :
         return state
