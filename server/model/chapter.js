@@ -1,9 +1,8 @@
-class Comment{
+class Chapter {
     constructor(obj){
         this.id = obj && obj.id ? obj.id : null;
-        this.postId = obj && obj.post_id ? obj.post_id : null;    
-        this.userId = obj && obj.user_id ? obj.user_id : null;    
-        this.comment = obj && obj.comment ? obj.comment : null;   
+        this.subjectId = obj && obj.subject_id ? obj.subject_id : null; 
+        this.chapterName = obj && obj.chapter_name ? obj.chapter_name : null;  
         this.createDate = obj && obj.create_date ? obj.create_date : null;
         this.updateDate = obj && obj.update_date ? obj.update_date : null;
         this.createdBy = obj && obj.created_by ? obj.created_by : null;
@@ -11,6 +10,6 @@ class Comment{
     }
 }
 
-module.exports = Comment;
+module.exports = Chapter;
 
 

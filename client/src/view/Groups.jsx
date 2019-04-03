@@ -82,7 +82,7 @@ class Groups extends Component {
                                             <div>
                                                 <Typography>
                                                 <label><h4>{subject.name}</h4></label>
-                                                <Link to='/ModalPaper'>
+                                                <Link to={`/modalList/${subject.subject_id}`}>
                                                     <h4>Modal Paper</h4>
                                                 </Link>
                                                 <Link to='/ChapterTest'>
