@@ -49,6 +49,10 @@ class Courses extends Component {
         this.props.addCourse(values, this.props.history);
     }
 
+    onCourseClick = (course_id) => {
+        this.props.history.push('/admin/courseDetails/' + course_id)
+    }
+
     render() {
 
         const {
@@ -95,7 +99,7 @@ class Courses extends Component {
                         coursesList.map((data, index) => {
                             return (
                                 <div >
-                                    <Card login>
+                                    <Card onClick={() => this.onCourseClick(data.id)}>
                                         <CardHeader
                                             className={`${classes.cardHeader} ${classes.textCenter}`}
                                         >
