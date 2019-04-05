@@ -8,6 +8,7 @@ import FullTestList from '../view/FullTestList';
 
 import Courses from '../admin/views/Courses';
 import CourseDetails from '../admin/views/CourseDetails';
+import Group from '../admin/views/Groups';
 
 const demoRoutes = [];
 export const dashboardRoutes = [
@@ -28,6 +29,14 @@ export const adminDashboardRoutes = [
         mini: "UD",
         icon: Dashboard,
         component: Courses,
+       // collapse : "true"
+    },
+    {
+        path: "/admin/group/:course_id",
+        name: "Group",
+        mini: "UD",
+        icon: Dashboard,
+        component: Group,
        // collapse : "true"
     },
     {
