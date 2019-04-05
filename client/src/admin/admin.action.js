@@ -91,7 +91,7 @@ export const addCourse = (values, history) => {
     }
 }
 
-export const fetchGroups = (course_id, history) => {
+export const fetchGroups = (history) => {
     localStorage.setItem('token', "abc");
     //let token = JSON.parse(localStorage.getItem('user')).token;
     let token = localStorage.getItem('token');
@@ -101,7 +101,7 @@ export const fetchGroups = (course_id, history) => {
     return (dispatch) => {
         if(token!=null) {
             dispatch({ type: admin.GROUPS_LOADING })
-            fetch(StringFormat(API_ROOT + URI.GET_GROUPS), {
+            fetch(StringFormat(API_ROOT + URI.GROUPS), {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -110,7 +110,7 @@ export const fetchGroups = (course_id, history) => {
             })
             .then(res => res.json())
             .then(data => {
-                console.log("admin dta", data);
+                console.log("groups dta", data);
                 // if(data.detail === 'Signature has expired.') {
                 //     dispatch({
                 //         type: collection.MY_COLLECTION_FAILURE,
@@ -126,6 +126,51 @@ export const fetchGroups = (course_id, history) => {
             .catch(err => {
                 dispatch({
                     type: admin.GROUPS_FAILURE,
+                    payload: err
+                })
+            })
+        } else{
+            history.push('/login');
+        }
+    }
+}
+
+export const addGroup = (values, history) => {
+    localStorage.setItem('token', "abc");
+    //let token = JSON.parse(localStorage.getItem('user')).token;
+    let token = localStorage.getItem('token');
+    console.log(token,"token");
+    //let id = JSON.parse(localStorage.getItem('user')).id
+    console.log("token---", token)
+    return (dispatch) => {
+        if(token!=null) {
+            dispatch({ type: admin.ADD_GROUP_LOADING })
+            fetch(StringFormat(API_ROOT + URI.GROUPS), {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                //'token': token
+            },
+            body: JSON.stringify(values)
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log("ADD GROUP  dta", data);
+                // if(data.detail === 'Signature has expired.') {
+                //     dispatch({
+                //         type: collection.MY_COLLECTION_FAILURE,
+                //         payload: data
+                //     })
+                //      return history.push('/login')
+                // }
+                dispatch({
+                    type: admin.ADD_GROUP_SUCCESS,
+                    payload: data
+                })
+            })
+            .catch(err => {
+                dispatch({
+                    type: admin.ADD_GROUP_FAILURE,
                     payload: err
                 })
             })
