@@ -5,7 +5,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { fetchCourses, addCourse } from '../admin.action';
+import { fetchCourses, addCourse} from '../admin.action';
 import Card from "../../components/Card/Card.jsx";
 import CardBody from '../../components/Card/CardBody.jsx';
 import CardHeader from "../../components/Card/CardHeader.jsx";
@@ -31,7 +31,9 @@ class Courses extends Component {
 
     state = {
         addCourse: false,
-        course_name: null
+        course_name: null,
+        addGroup: false,
+        group_name: null,
     }
 
     componentDidMount() {
@@ -99,12 +101,21 @@ class Courses extends Component {
                         coursesList.map((data, index) => {
                             return (
                                 <div >
-                                    <Card onClick={() => this.onCourseClick(data.id)}>
-                                        <CardHeader
+                                    <Card >
+                                        <CardHeader onClick={() => this.onCourseClick(data.id)}
                                             className={`${classes.cardHeader} ${classes.textCenter}`}
                                         >
                                             <h2 className={classes.cardTitle}> {data.courseName}</h2>
                                         </CardHeader>
+                                        <Link to={`/admin/group/${data.id}`}>
+                                            Groups
+                                        </Link>
+                                        <Link to={`/login`}>
+                                            Subjects
+                                        </Link>
+                                        <Link to={`/login`}>
+                                            Chapters
+                                        </Link>
                                     </Card>
                                 </div>
                             )
@@ -123,7 +134,7 @@ const mapStateToProps = (state) => {
     return {
         coursesList: state.admin.coursesList,
         coursesLoading: state.admin.coursesLoading,
-        coursesError: state.admin.coursesError
+        coursesError: state.admin.coursesError,
     }
 }
 
