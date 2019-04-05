@@ -12,6 +12,10 @@ const initialState = {
     groupsList: [],
     groupsLoading: false,
     groupsError: null,
+
+    newGroup: [],
+    newGroupLoading: false,
+    newGroupError: null,
 }
 
 const reducer = (state = initialState, action) =>{
@@ -41,6 +45,17 @@ const reducer = (state = initialState, action) =>{
         return { ...state, groupsList: state.groupsList.concat(action.payload), groupsLoading: false }
     case admin.GROUPS_FAILURE: 
         return { ...state, groupsList: [], groupsError: action.payload, groupsLoading: false }
+
+    case admin.ADD_GROUP_LOADING: 
+        return { ...state, newGroupLoading: true }
+    case admin.ADD_GROUP_SUCCESS:
+        return { 
+                ...state,
+                groupsList : state.groupsList.concat(action.payload),
+                newGroupLoading: false
+            }
+    case admin.ADD_GROUP_FAILURE: 
+        return { ...state, newGroup: [], newGroupError: action.payload, newGroupLoading: false }
 
     default :
         return state
