@@ -88,7 +88,7 @@ class Groups extends Component {
                                                 <Link to='/ChapterTest'>
                                                     <h4>Chapter Test</h4>
                                                 </Link>
-                                                <Link to='/FullTest'>
+                                                <Link to={`/fullTestList/${subject.subject_id}`}>
                                                     <h4>Full Test</h4>
                                                 </Link>
 
