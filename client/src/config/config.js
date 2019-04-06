@@ -7,6 +7,8 @@ export const URI = {
     GROUPS: 'group',
     SUBJECTS: 'subject',
     FETCH_CHAPTERS: 'fetchChapters/{0}',
+    CHAPTERS: 'chapter',
     LOGIN: 'user/authenticate',
     REGISTRATION: 'user',
+    UPLOAD: '/uploadQuestions/{0}/{1}'
 }
