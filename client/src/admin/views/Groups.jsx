@@ -106,7 +106,11 @@ render() {
                                     >
                                         <h2 className={classes.cardTitle}> {data.groupName}</h2>
                                     </CardHeader>
+                                    <Link to={`/admin/subject/${data.id}`}>
+                                        Subjects
+                                    </Link>
                                 </Card>
+                                
                             </div>
                         )
                     })
