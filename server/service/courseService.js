@@ -104,6 +104,8 @@ class CourseService {
                                 course = new Course(item);
                                 return course
                             })
+                        } else {
+                            courses = [];
                         }
                         resolve(data);
                     }
