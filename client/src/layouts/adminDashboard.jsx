@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import { adminDashboardRoutes } from "../routes/dashboard.jsx";
+import { adminDashboardRoutes, otherRoutesAdmin } from "../routes/dashboard.jsx";
 import {Route, Switch ,Redirect} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -102,7 +102,7 @@ class AdminDashboard extends Component {
 
 const switchRoutes = (
     <Switch>
-        {[ ...adminDashboardRoutes].map((props,key) => {
+        {[ ...otherRoutesAdmin, ...adminDashboardRoutes].map((props,key) => {
             if(props.redirect){
                 return <Redirect to={props.path} from={props.pathTo} key={key}/>;
             }
