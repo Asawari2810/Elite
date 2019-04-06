@@ -24,6 +24,14 @@ const initialState = {
     newSubject: [],
     newSubjectLoading: false,
     newSubjectError: null,
+
+    chaptersList: [],
+    chaptersLoading: false,
+    chaptersError: null,
+
+    newChapter: [],
+    newChapterLoading: false,
+    newChapterError: null,
 }
 
 const reducer = (state = initialState, action) =>{
@@ -82,6 +90,24 @@ const reducer = (state = initialState, action) =>{
             }
     case admin.ADD_SUBJECT_FAILURE: 
         return { ...state, newSubject: [], newSubjectError: action.payload, newSubjectLoading: false }
+
+    case admin.CHAPTERS_LOADING: 
+        return { ...state, chaptersLoading: true }
+    case admin.CHAPTERS_SUCCESS:
+        return { ...state, chaptersList: state.chaptersList.concat(action.payload), chaptersLoading: false }
+    case admin.CHAPTERS_FAILURE: 
+        return { ...state, chaptersList: [], chaptersError: action.payload, chaptersLoading: false }
+
+    case admin.ADD_CHAPTER_LOADING: 
+        return { ...state, newChapterLoading: true }
+    case admin.ADD_CHAPTER_SUCCESS:
+        return { 
+                ...state,
+                chaptersList : state.chaptersList.concat(action.payload),
+                newChapterLoading: false
+            }
+    case admin.ADD_SUBJECT_FAILURE: 
+        return { ...state, newChapter: [], newChapterError: action.payload, newChapterLoading: false }
 
     default :
         return state
