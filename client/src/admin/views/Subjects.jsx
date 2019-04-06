@@ -102,12 +102,12 @@ render() {
                         return (
                             <div >
                                 <Card >
-                                    <CardHeader onClick={() => this.onSubjectClick(data.id)}
+                                    <CardHeader 
                                         className={`${classes.cardHeader} ${classes.textCenter}`}
                                     >
                                         <h2 className={classes.cardTitle}> {data.subjectName}</h2>
-                                    <Link to={`/admin/subject/${data.id}`}>
-                                        Subjects
+                                    <Link to={`/admin/chapter/${data.id}`}>
+                                        Chapters
                                     </Link>
                                     </CardHeader>
                                 </Card>
