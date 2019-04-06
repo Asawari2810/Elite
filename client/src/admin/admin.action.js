@@ -91,7 +91,7 @@ export const addCourse = (values, history) => {
     }
 }
 
-export const fetchGroups = (history) => {
+export const fetchGroups = (course_id, history) => {
     localStorage.setItem('token', "abc");
     //let token = JSON.parse(localStorage.getItem('user')).token;
     let token = localStorage.getItem('token');
@@ -180,7 +180,7 @@ export const addGroup = (values, history) => {
     }
 }
 
-export const fetchSubjects = (history) => {
+export const fetchSubjects = (group_id, history) => {
     localStorage.setItem('token', "abc");
     //let token = JSON.parse(localStorage.getItem('user')).token;
     let token = localStorage.getItem('token');
