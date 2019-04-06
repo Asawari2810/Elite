@@ -1,5 +1,6 @@
 CREATE TABLE IF NOT EXISTS `question` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `question_no` int(11) NOT NULL,
   `question`  TEXT NOT NULL,
   `option_a` varchar(244) NOT NULL,
   `option_b` varchar(244) NOT NULL,

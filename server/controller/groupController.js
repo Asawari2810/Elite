@@ -23,6 +23,17 @@ class GroupController {
             res.send(err);
         }) 
     }
+
+    static getAllGroup(req,res){
+        groupService.getAllGroup().then( (group ) =>{
+            res.send(group);
+        })
+        .catch(err => {
+            res.status(500);
+            res.send(err);
+        }) 
+    }
+
 }
 
 module.exports = GroupController;

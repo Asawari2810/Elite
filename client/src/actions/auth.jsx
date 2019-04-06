@@ -1,66 +1,82 @@
-import React,{Component} from 'react';
-import {auth} from '../constants/Auth.constants.jsx';
-import axios from 'axios';
+import { auth } from '../constants/Auth.constants.jsx';
+import { API_ROOT, URI } from '../config/config';
 
-export function loginUser (values,history){
-
-   
-    return(dispatch) => {
-        dispatch({type : auth.REGISTER_USER})
-        const credentials ={
-            phone_number : values.loginEmail,
-            password : values.loginPassword
-        }
-
-        console.log(credentials);
-
-        axios.post("http://localhost:4000/login",credentials).then(response => {
-            dispatch(registerUserSuccess(response.data))
-            history.push('dashboard');
-            console.log(response);
-            console.log("dispatch done");
-        }).catch(error => {
-            console.log("inside catch");
-            console.log(error)
+export const register = (values, history) => {
+    return (dispatch) => {
+        dispatch({ type: auth.REGISTRATION_LOADING })
+        fetch(API_ROOT + URI.REGISTRATION, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(values)
+        })
+        .then(res => {
+            console.log("res----", res)
+            if(res.status === 200) {
+                history.push('/mailsent');
+            } else {
+                alert("server error")
+            }
+        })
+        .catch(err => {
+            dispatch({
+                type: auth.REGISTRATION_FAILURE,
+                payload: err
+            })
         })
     }
-
 }
 
-export function signUp (values, history){
-    return(disptach) =>{
-        disptach({type : auth.REGISTER_USER})
-        const credentials = {
-            firstName: values.firstName,
-            lastName: values.lastName,
-            signUpEmail: values.signUpEmail,
-            password: values.password,
-            confirmPassword: values.confirmPassword
-        }
 
-        axios.post("http://localhost:4000/login",credentials).then(response => {
-            console.log(response);
-        }).catch(error => {
-            console.log(error)
+export function loginUser (values,history) {
+    return(dispatch) => {
+        dispatch({type : auth.LOGIN_LOADING})
+        fetch(API_ROOT + URI.LOGIN, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(values)
         })
+        .then(res => res.json())
+        .then(data => {
+            if(data.id) {
+                dispatch({
+                    type: auth.LOGIN_SUCCESS,
+                    payload: data
+                })
+                localStorage.setItem('user',JSON.stringify(data));
+                if(data.role === 'admin') {
+                    history.push('/admin/users');
+                } else {
+                    if(data.isProfile === true){
+                        history.push('/feeds');
+                    } 
+                    else history.push('/dashboard');
+                }
+            } else {
+                dispatch({
+                    type: auth.LOGIN_FAILURE,
+                    payload: data.msg
+                })
+                alert(data.msg)
+            }
+            
+        })
+        .catch(err => {
+            dispatch({
+                type: auth.LOGIN_FAILURE,
+                payload: err
+            })
+        })
+
     }
+
 }
 
 export function logout(){
     localStorage.clear();
     //history.push('main');
-    window.location="/main";
-}
-export function registerUserSuccess(user) {
-    return{
-        type : auth.REGISTER_USER_SUCCESS,
-        payload : {user}
-    }
-}
-
-export function registerUserFailure(error) {
-    return{
-        type : auth.REGISTER_USER_FAILURE,
-        payload : {error}
-    }
+    window.location="/login";
 }
