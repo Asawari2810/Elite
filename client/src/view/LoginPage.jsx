@@ -5,7 +5,6 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import { Email, LockOutlined } from "@material-ui/icons";
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Link, NavLink } from 'react-router-dom';
 // import { ClipLoader } from 'react-spinners';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -19,43 +18,25 @@ import { loginUser } from '../actions/auth.jsx';
 import GridContainer from '../components/Grid/GridContainer';
 import GridItem from '../components/Grid/GridItem';
 import CardHeader from "../components/Card/CardHeader.jsx";
-import {css} from 'emotion';
-
-const override = css`
-    display: block;
-    margin: 0 auto;
-    border-color: red;
-`;
 
 class LoginPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loginEmailState: "",
-      loginPasswordState: "",
-      loginEmail: "",
-      loginPassword: ""
-    }
+  moveToRegistration = () => {
+    this.props.history.push('/register')
   }
 
-
   render() {
-    const { classes, userLoading } = this.props;
+    const { classes } = this.props;
     return (
       <div className={classes.content}>
         <GridContainer justify="center">
           <GridItem xs={12} sm={6} md={4}>
             <Formik
-
               initialValues={{
-                loginEmail: '',
-                loginPassword: ''
+                email: '',
+                password: ''
               }}
               validationSchema={loginSchema}
               onSubmit={values => {
-                console.log(values)
-                // this.setState({loginEmail : values.loginEmail})
-                // this.setState({loginPassword : values.loginPassword})
                 this.props.loginUser(values, this.props.history)
               }}
               render={({ handleSubmit, handleChange, values, errors }) => (
@@ -71,14 +52,13 @@ class LoginPage extends Component {
                       <CustomInput  
                         onChange={handleChange}
                         labelText="Email..."
-                        name="loginEmail"
-                        id = "loginEmail"
-                        value = {values.loginEmail}
+                        name="email"
+                        id = "email"
+                        value = {values.email}
                         formControlProps={{
                           fullWidth: true
                         }}
                         inputProps={{
-
                           type: "email",
                           endAdornment: (
                             <InputAdornment position="end">
@@ -91,9 +71,9 @@ class LoginPage extends Component {
                       <CustomInput
                         labelText="Password"
                         onChange={handleChange}
-                        name="loginPassword"
-                        id = "loginPassword"
-                        value = {values.loginPassword}
+                        name="password"
+                        id = "password"
+                        value = {values.password}
                         formControlProps={{
                           fullWidth: true
                         }}
@@ -115,16 +95,12 @@ class LoginPage extends Component {
                         </Button>
                        
                      
-                        <Link to={'/register'}>
-                        <Button color="rose" round>
+                        
+                        <Button color="rose" round onClick={this.moveToRegistration}>
                           Sign Up
                         </Button>
-                        </Link>
 
                       </div>
-
-                      <div>{errors.loginEmail}</div>
-                      <div>{errors.loginPassword}</div>
                     </CardBody>
                   
                 </Card>
@@ -142,8 +118,8 @@ LoginPage.propTypes = {
 };
 
 const loginSchema = Yup.object().shape({
-  loginEmail: Yup.string().email('Invalid Email').required('Please enter email.'),
-  loginPassword: Yup.string().min(4, 'Too short').required('Please enter password.')
+  email: Yup.string().email('Invalid Email').required('Please enter email.'),
+  password: Yup.string().min(4, 'Too short').required('Please enter password.')
 });
 
 const mapStateToProps = state => {
