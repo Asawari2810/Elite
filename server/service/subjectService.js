@@ -74,6 +74,8 @@ class SubjectService {
                                 subject = new Subject(item);
                                 return subject
                             })
+                        } else {
+                            subjects = [];
                         }
                         resolve(subjects);
                     }

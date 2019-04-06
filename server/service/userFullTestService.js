@@ -55,6 +55,27 @@ class UserFullTestService {
             })
         })
     }
+
+    static getFullTestScore(subjectId, userId) {
+        return new Promise((resolve, reject) => {
+            var connection;
+            DB.getConnection().then((conn) => {
+                connection = conn;
+                connection.query('select * from user_full_test where subject_id = ? AND user_id = ?', [subjectId, userId], (err, data) => {
+                    DB.release(connection);
+                    if (err) {
+                        reject(err);
+                    } else {
+                        let user = {};
+                        if (data && data.length > 0) {
+                            user = new UserFullTest(data[0]);
+                        }
+                        resolve(user);
+                    }
+                })
+            })
+        })
+    }
 }
 
 module.exports = UserFullTestService

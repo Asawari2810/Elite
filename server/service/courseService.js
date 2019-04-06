@@ -74,8 +74,40 @@ class CourseService {
                                 course = new Course(item);
                                 return course
                             })
+                        } else {
+                            courses = [];
                         }
                         resolve(courses);
+                    }
+                })
+            })
+        })
+    }
+
+    static getCoursesAlongGroup() {
+        return new Promise((resolve, reject) => {
+            var connection;
+            DB.getConnection().then((conn) => {
+                connection = conn;
+                connection.query(
+                    `select c.id, c.course_name, g.id, g.group_name from course c 
+                    inner join course_group g on course_id = c.id`, [], (err, data) => {
+                    DB.release(connection);
+                    if (err) {
+                        reject(err);
+                    } else {
+                        let courses;
+                        if (data && data.length > 0) {
+                            console.log("here")
+                            courses = data.map(item => {
+                                let course;
+                                course = new Course(item);
+                                return course
+                            })
+                        } else {
+                            courses = [];
+                        }
+                        resolve(data);
                     }
                 })
             })

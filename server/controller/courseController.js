@@ -34,6 +34,17 @@ class CourseController {
         }) 
     }
 
+    static getCourseAlongGroup(req,res) {
+        console.log("here----")
+        courseService.getCoursesAlongGroup().then( (course ) =>{
+            res.send(course);
+        })
+        .catch(err => {
+            res.status(500);
+            res.send(err);
+        }) 
+    }
+
 
 }
 

@@ -6,5 +6,7 @@ export const URI = {
     ADD_COURSE: 'course',
     GROUPS: 'group',
     SUBJECTS: 'subject',
-    FETCH_CHAPTERS: 'fetchChapters/{0}'
+    FETCH_CHAPTERS: 'fetchChapters/{0}',
+    LOGIN: 'user/authenticate',
+    REGISTRATION: 'user',
 }
