@@ -110,10 +110,6 @@ class Courses extends Component {
                                         <Link to={`/admin/group/${data.id}`}>
                                             Groups
                                         </Link>
-                                        
-                                        <Link to={`/login`}>
-                                            Chapters
-                                        </Link>
                                     </Card>
                                 </div>
                             )
