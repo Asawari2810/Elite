@@ -1,8 +1,16 @@
-export const API_ROOT = 'http://5c9e1aba595c55001487be74.mockapi.io/';
+export const API_ROOT = 'http://localhost:5000/api/';
 
 export const URI = {
     GROUPS: 'groups',
     MODAL_LIST: 'modalList',
     FULL_TEST_QUESTIONS : 'fullTestQuestions',
-    FULL_TEST_SUBMIT_SCORE : 'FullTestSubmitScore'
+    FULL_TEST_SUBMIT_SCORE : 'FullTestSubmitScore',
+    MODAL_LIST: 'modalList',
+    GET_COURSES: 'course',
+    ADD_COURSE: 'course',
+    GROUPS: 'group',
+    SUBJECTS: 'subject',
+    FETCH_CHAPTERS: 'fetchChapters/{0}',
+    LOGIN: 'user/authenticate',
+    REGISTRATION: 'user',
 }
