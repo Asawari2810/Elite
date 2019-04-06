@@ -35,6 +35,10 @@ export const adminDashboardRoutes = [
         component: Courses,
        // collapse : "true"
     },
+
+];
+
+export const otherRoutesAdmin = [
     {
         path: "/admin/group/:course_id",
         name: "Group",
@@ -67,7 +71,7 @@ export const adminDashboardRoutes = [
         component: CourseDetails,
        // collapse : "true"
     }
-];
+]
 
 export const otherRoutes = [
    
