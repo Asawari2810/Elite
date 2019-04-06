@@ -1,8 +1,6 @@
 export const API_ROOT = 'http://localhost:5000/api/';
 
 export const URI = {
-    GROUPS: 'groups',
-    MODAL_LIST: 'modalList',
     FULL_TEST_QUESTIONS : 'fullTestQuestions',
     FULL_TEST_SUBMIT_SCORE : 'FullTestSubmitScore',
     MODAL_LIST: 'modalList',
