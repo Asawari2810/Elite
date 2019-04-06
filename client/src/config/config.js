@@ -5,4 +5,6 @@ export const URI = {
     GET_COURSES: 'course',
     ADD_COURSE: 'course',
     GROUPS: 'group',
+    SUBJECTS: 'subject',
+    FETCH_CHAPTERS: 'fetchChapters/{0}'
 }
