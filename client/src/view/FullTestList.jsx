@@ -101,15 +101,17 @@ class FullTestList extends Component {
             classes
         } = this.props;
 
+        const { id } = this.props.match.params;
+
         return (
             <div >
                 <Grid container >
                     {fullTest.map(testLink => {
                         return (
                             <div >
-                                {/* <Link to={`/collection/${collection.id}`}> */}
+                                <Link to={`/fullTest/${testLink.test_id}/${id}`}>
                                 <Card >
-                                    <CardActionArea onClick={() => this.testLinkDetail(testLink.test_id)}>
+                                    <CardActionArea>
                                         <CardContent>
                                             <Typography gutterBottom variant="h5" component="h2" style={{ textTransform: 'capitalize' }}>
                                                 {testLink.name}
@@ -117,7 +119,7 @@ class FullTestList extends Component {
                                         </CardContent>
                                     </CardActionArea>
                                 </Card>
-                                {/* </Link> */}
+                                </Link>
                             </div>
                         );
                     })}
@@ -126,23 +128,4 @@ class FullTestList extends Component {
         )
     }
 }
-
-
-
-// const mapStateToProps = (state) => {
-//     return {
-//         modalList: state.modal.modalList,
-//         modalListLoading: state.modal.modalListLoading,
-//         modalListError: state.modal.modalListError
-//     }
-// }
-
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         fetchModalPaperList: (subject_id, history) => dispatch(fetchModalPaperList(subject_id, history)),
-//     }
-// }
-
-//export default compose(withStyles(styles), connect(mapStateToProps, mapDispatchToProps))(ModalPaperList);
-
 export default (FullTestList);
