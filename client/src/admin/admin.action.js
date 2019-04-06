@@ -179,3 +179,181 @@ export const addGroup = (values, history) => {
         }
     }
 }
+
+export const fetchSubjects = (history) => {
+    localStorage.setItem('token', "abc");
+    //let token = JSON.parse(localStorage.getItem('user')).token;
+    let token = localStorage.getItem('token');
+    console.log(token,"token");
+    //let id = JSON.parse(localStorage.getItem('user')).id
+    console.log("token---", token)
+    return (dispatch) => {
+        if(token!=null) {
+            dispatch({ type: admin.SUBJECTS_LOADING })
+            fetch(StringFormat(API_ROOT + URI.SUBJECTS), {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                // 'token': token
+            },
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log("groups dta", data);
+                // if(data.detail === 'Signature has expired.') {
+                //     dispatch({
+                //         type: collection.MY_COLLECTION_FAILURE,
+                //         payload: data
+                //     })
+                //      return history.push('/login')
+                // }
+                dispatch({
+                    type: admin.SUBJECTS_SUCCESS,
+                    payload: data
+                })
+            })
+            .catch(err => {
+                dispatch({
+                    type: admin.SUBJECTS_FAILURE,
+                    payload: err
+                })
+            })
+        } else{
+            history.push('/login');
+        }
+    }
+}
+
+export const addSubject = (values, history) => {
+    localStorage.setItem('token', "abc");
+    //let token = JSON.parse(localStorage.getItem('user')).token;
+    let token = localStorage.getItem('token');
+    console.log(token,"token");
+    //let id = JSON.parse(localStorage.getItem('user')).id
+    console.log("token---", token)
+    return (dispatch) => {
+        if(token!=null) {
+            dispatch({ type: admin.ADD_SUBJECT_LOADING })
+            fetch(StringFormat(API_ROOT + URI.SUBJECTS), {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                //'token': token
+            },
+            body: JSON.stringify(values)
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log("ADD SUBJECT  dta", data);
+                // if(data.detail === 'Signature has expired.') {
+                //     dispatch({
+                //         type: collection.MY_COLLECTION_FAILURE,
+                //         payload: data
+                //     })
+                //      return history.push('/login')
+                // }
+                dispatch({
+                    type: admin.ADD_SUBJECT_SUCCESS,
+                    payload: data
+                })
+            })
+            .catch(err => {
+                dispatch({
+                    type: admin.ADD_SUBJECT_FAILURE,
+                    payload: err
+                })
+            })
+        } else{
+            history.push('/login');
+        }
+    }
+}
+
+export const fetchChapters = (subject_id, history) => {
+    localStorage.setItem('token', "abc");
+    //let token = JSON.parse(localStorage.getItem('user')).token;
+    let token = localStorage.getItem('token');
+    console.log(token,"token");
+    //let id = JSON.parse(localStorage.getItem('user')).id
+    console.log("token---", token)
+    return (dispatch) => {
+        if(token!=null) {
+            dispatch({ type: admin.CHAPTERS_LOADING })
+            fetch(StringFormat(API_ROOT + URI.FETCH_CHAPTERS, subject_id), {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                // 'token': token
+            },
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log("groups dta", data);
+                // if(data.detail === 'Signature has expired.') {
+                //     dispatch({
+                //         type: collection.MY_COLLECTION_FAILURE,
+                //         payload: data
+                //     })
+                //      return history.push('/login')
+                // }
+                dispatch({
+                    type: admin.CHAPTERS_SUCCESS,
+                    payload: data
+                })
+            })
+            .catch(err => {
+                dispatch({
+                    type: admin.CHAPTERS_FAILURE,
+                    payload: err
+                })
+            })
+        } else{
+            history.push('/login');
+        }
+    }
+}
+
+export const addChapter = (values, history) => {
+    localStorage.setItem('token', "abc");
+    //let token = JSON.parse(localStorage.getItem('user')).token;
+    let token = localStorage.getItem('token');
+    console.log(token,"token");
+    //let id = JSON.parse(localStorage.getItem('user')).id
+    console.log("token---", token)
+    return (dispatch) => {
+        if(token!=null) {
+            dispatch({ type: admin.ADD_CHAPTER_LOADING })
+            fetch(StringFormat(API_ROOT + URI.CHAPTERS), {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                //'token': token
+            },
+            body: JSON.stringify(values)
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log("ADD SUBJECT  dta", data);
+                // if(data.detail === 'Signature has expired.') {
+                //     dispatch({
+                //         type: collection.MY_COLLECTION_FAILURE,
+                //         payload: data
+                //     })
+                //      return history.push('/login')
+                // }
+                dispatch({
+                    type: admin.ADD_CHAPTER_SUCCESS,
+                    payload: data
+                })
+            })
+            .catch(err => {
+                dispatch({
+                    type: admin.ADD_CHAPTER_FAILURE,
+                    payload: err
+                })
+            })
+        } else{
+            history.push('/login');
+        }
+    }
+}
