@@ -37,8 +37,8 @@ state = {
 }
 
 componentDidMount() {
-    const { course_id } = this.props.match.params;
-    this.props.fetchSubjects(course_id, this.props.history);
+    const { group_id } = this.props.match.params;
+    this.props.fetchSubjects(group_id, this.props.history);
 }
 
 handleAddSubject = () => {
@@ -133,7 +133,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchSubjects: (history) => dispatch(fetchSubjects(history)),
+        fetchSubjects: (group_id, history) => dispatch(fetchSubjects(group_id, history)),
         addSubject: (values, history) => dispatch(addSubject(values, history))
     }
 }
