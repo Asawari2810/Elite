@@ -16,6 +16,14 @@ const initialState = {
     newGroup: [],
     newGroupLoading: false,
     newGroupError: null,
+
+    subjectsList: [],
+    subjectsLoading: false,
+    subjectsError: null,
+
+    newSubject: [],
+    newSubjectLoading: false,
+    newSubjectError: null,
 }
 
 const reducer = (state = initialState, action) =>{
@@ -56,6 +64,24 @@ const reducer = (state = initialState, action) =>{
             }
     case admin.ADD_GROUP_FAILURE: 
         return { ...state, newGroup: [], newGroupError: action.payload, newGroupLoading: false }
+
+    case admin.SUBJECTS_LOADING: 
+        return { ...state, subjectsLoading: true }
+    case admin.SUBJECTS_SUCCESS:
+        return { ...state, subjectsList: state.subjectsList.concat(action.payload), subjectsLoading: false }
+    case admin.SUBJECTS_FAILURE: 
+        return { ...state, subjectsList: [], subjectsError: action.payload, subjectsLoading: false }
+
+    case admin.ADD_SUBJECT_LOADING: 
+        return { ...state, newSubjectLoading: true }
+    case admin.ADD_SUBJECT_SUCCESS:
+        return { 
+                ...state,
+                subjectsList : state.subjectsList.concat(action.payload),
+                newSubjectLoading: false
+            }
+    case admin.ADD_SUBJECT_FAILURE: 
+        return { ...state, newSubject: [], newSubjectError: action.payload, newSubjectLoading: false }
 
     default :
         return state
