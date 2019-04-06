@@ -133,7 +133,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchGroups: (history) => dispatch(fetchGroups(history)),
+        fetchGroups: (course_id, history) => dispatch(fetchGroups(course_id, history)),
         addGroup: (values, history) => dispatch(addGroup(values, history))
     }
 }
