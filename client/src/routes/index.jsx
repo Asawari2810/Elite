@@ -6,6 +6,8 @@ var  indexRoutes = [
     { path: '/admin/courses', component: AdminDashboard},
     { path: '/admin/courseDetails/:id', component: AdminDashboard},
     { path: '/admin/group/:course_id', component: AdminDashboard},
+    { path: '/admin/subject/:group_id', component: AdminDashboard},
+    { path: '/admin/chapter/:subject_id', component: AdminDashboard},
 
     {path : '/login', name: 'Auth' ,component : Auth },
     {path : '/register' , name :'Auth' , component : Auth},

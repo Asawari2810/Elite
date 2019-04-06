@@ -9,6 +9,8 @@ import FullTestList from '../view/FullTestList';
 import Courses from '../admin/views/Courses';
 import CourseDetails from '../admin/views/CourseDetails';
 import Group from '../admin/views/Groups';
+import AdminSubjects from '../admin/views/Subjects';
+import AdminChapters from '../admin/views/Chapters';
 
 const demoRoutes = [];
 export const dashboardRoutes = [
@@ -40,8 +42,24 @@ export const adminDashboardRoutes = [
        // collapse : "true"
     },
     {
+        path: "/admin/subject/:group_id",
+        name: "Subjects",
+        mini: "UD",
+        icon: Dashboard,
+        component: AdminSubjects,
+       // collapse : "true"
+    },
+    {
+        path: "/admin/chapter/:subject_id",
+        name: "Subjects",
+        mini: "UD",
+        icon: Dashboard,
+        component: AdminChapters,
+       // collapse : "true"
+    },
+    {
         path: "/admin/courseDetails/:id",
-        name: "Courses",
+        name: "CourseDetails",
         mini: "UD",
         icon: Dashboard,
         component: CourseDetails,
