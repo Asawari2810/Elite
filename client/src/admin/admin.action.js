@@ -358,17 +358,17 @@ export const addChapter = (values, history) => {
     }
 }
 
-export const uploadFile = (subjectId, chapterId, values, history) => {
+export const uploadFile = (values, history) => {
     localStorage.setItem('token', "abc");
     //let token = JSON.parse(localStorage.getItem('user')).token;
     let token = localStorage.getItem('token');
-    console.log(token,"token");
+    console.log(values.file,"file-----");
     //let id = JSON.parse(localStorage.getItem('user')).id
     console.log("token---", token)
     return (dispatch) => {
         if(token!=null) {
             dispatch({ type: admin.UPLOAD_QUESTIONS_FILE_LOADING })
-            fetch(StringFormat(API_ROOT + URI.UPLOAD, subjectId, chapterId), {
+            fetch(StringFormat(API_ROOT + URI.UPLOAD), {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -124,6 +124,8 @@ class QuestionService {
                                 question = new Question(item);
                                 return question;
                             })
+                        } else {
+                            questions = []
                         }
                         resolve(questions);
                     }

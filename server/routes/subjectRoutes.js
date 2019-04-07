@@ -6,5 +6,6 @@ const SubjectController = require('../controller/subjectController');
 subjectRoute.get('/:subjectId', Auth.isAuthenticated , SubjectController.getSubjectByID)
 subjectRoute.post('/', Auth.isAuthenticated, SubjectController.addSubject);
 subjectRoute.get('/', Auth.isAuthenticated, SubjectController.getAllSubject);
+subjectRoute.get('/chapter/:subjectId', Auth.isAuthenticated, SubjectController.getChapterBySubjectID);
 
 module.exports = subjectRoute;

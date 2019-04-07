@@ -1,6 +1,6 @@
 const DB = require('../util/db');
 const Subject = require('../model/subject');
-
+const Chapter = require('../model/chapter');
 class SubjectService {
 
     static addSubject(subject) {
@@ -78,6 +78,34 @@ class SubjectService {
                             subjects = [];
                         }
                         resolve(subjects);
+                    }
+                })
+            })
+        })
+    }
+
+    static getChapterBySubjectID(id) {
+        return new Promise((resolve, reject) => {
+            var connection;
+            DB.getConnection().then((conn) => {
+                connection = conn;
+                connection.query(`select * from chapter where subject_id = ? `, [id], (err, data) => {
+                    DB.release(connection);
+                    if (err) {
+                        reject(err);
+                    } else {
+                        let chapters;
+                        if (data && data.length > 0) {
+                            console.log("here")
+                            chapters = data.map(item => {
+                                let chapter;
+                                chapter = new Chapter(item);
+                                return chapter
+                            })
+                        } else {
+                            chapters = [];
+                        }
+                        resolve(chapters);
                     }
                 })
             })

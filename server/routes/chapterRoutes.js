@@ -5,5 +5,6 @@ const ChapterController = require('../controller/chapterController');
 
 chapterRoute.get('/:chapterId', Auth.isAuthenticated , ChapterController.getChapterByID)
 chapterRoute.post('/', Auth.isAuthenticated, ChapterController.addChapter)
+//chapterRoute.get('/subject/:subjectId', Auth.isAuthenticated, ChapterController.getChapterBySubjectID)
 
 module.exports = chapterRoute;

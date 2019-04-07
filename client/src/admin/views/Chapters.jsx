@@ -57,10 +57,13 @@ handleSubmitChapter = (subject_id) => {
 handleFileChange(e) {
     e.preventDefault();
     let reader = new FileReader();
+    console.log("path ", e.target.files)
     let file = e.target.files[0];
+    //console.log("files---", file)
+    //this.setState({file: file})
     reader.onloadend = () => {
       this.setState({
-        file: file,
+        file: reader.result,
       });
     };
     reader.readAsDataURL(file);
@@ -69,9 +72,11 @@ handleFileChange(e) {
 uploadFileHandler = (subjectId, chapterId) => {
     console.log(this.state.file,"gilnlvndsv");
     let values = {
-        file: this.state.file
+        file: this.state.file,
+        subject_id: subjectId,
+        chapter_id: chapterId
     }
-    this.props.uploadFile(subjectId, chapterId, values, this.props.history);
+    this.props.uploadFile(values, this.props.history);
 }
 
 render() {
