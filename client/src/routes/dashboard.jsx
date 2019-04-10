@@ -87,7 +87,7 @@ export const otherRoutes = [
         name: 'Full Test List'
     },
     {
-        path: '/fullTest/:id/:subId',
+        path: '/fullTest/:subId',
         component : FullTest, 
         name: 'Full Test'
     },

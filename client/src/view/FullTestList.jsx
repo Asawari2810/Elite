@@ -109,7 +109,7 @@ class FullTestList extends Component {
                     {fullTest.map(testLink => {
                         return (
                             <div >
-                                <Link to={`/fullTest/${testLink.test_id}/${id}`}>
+                                <Link to={`/fullTest/${id}`}>
                                 <Card >
                                     <CardActionArea>
                                         <CardContent>

@@ -91,7 +91,7 @@ class CourseService {
                 connection = conn;
                 connection.query(
                     `select c.id, c.course_name, g.id, g.group_name from course c 
-                    inner join course_group g on course_id = c.id`, [], (err, data) => {
+                    inner join course_group g on g.course_id = c.id`, [], (err, data) => {
                     DB.release(connection);
                     if (err) {
                         reject(err);

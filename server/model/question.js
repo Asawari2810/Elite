@@ -1,6 +1,7 @@
 class Question {
     constructor(obj){
         this.id = obj && obj.id ? obj.id : null;
+        this.question = obj && obj.question ? obj.question : null;
         this.subjectId = obj && obj.subject_id ? obj.subject_id : null; 
         this.chapterId = obj && obj.chapter_id ? obj.chapter_id : null; 
         this.subjectId = obj && obj.subject_id ? obj.subject_id : null; 

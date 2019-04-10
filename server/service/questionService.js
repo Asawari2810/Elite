@@ -38,9 +38,9 @@ class QuestionService {
 
     static addQuestion(question) {
         return new Promise((resolve, reject) => {
-            console.log("question----", question);
+            //console.log("question----", question);
 
-            readXlsxFile('/Users/surbhiairan/Downloads/Taxation\ \(GST\)\ \(1\).xlsx')
+            readXlsxFile(question.file, schema)
                 .then((rows) => {
                     // `rows` is an array of rows
                     // each row being an array of cells.
@@ -53,30 +53,30 @@ class QuestionService {
                     })
                         .then(() => {
                             //subject = DB.addAttributesForNew(subject);
-                            connection.query(
-                                `INSERT INTO question (question_no, question, option_a, option_b, option_c, option_d, correct_answer, subject_id, chapter_id) VALUES ?`, [rows], (err, data) => {
-                                    if (err) {
-                                        DB.rollbackTransaction(connection);
-                                        DB.release(connection);
-                                        reject(err);
-                                    } else {
-                                        insertedId = data.insertId;
-                                        DB.commitTransaction(connection).then(() => {
-                                            console.log("data----", data)
-                                            resolve(data)
-                                            // SubjectService.getSubjectByID(insertedId).then(subject => {
-                                            //     resolve(subject);
-                                            // })
-                                         })
+                            // connection.query(
+                            //     `INSERT INTO question (question_no, question, option_a, option_b, option_c, option_d, correct_answer, subject_id, chapter_id) VALUES ?`, [rows], (err, data) => {
+                            //         if (err) {
+                            //             DB.rollbackTransaction(connection);
+                            //             DB.release(connection);
+                            //             reject(err);
+                            //         } else {
+                            //             insertedId = data.insertId;
+                            //             DB.commitTransaction(connection).then(() => {
+                            //                 console.log("data----", data)
+                            //                 resolve(data)
+                            //                 // SubjectService.getSubjectByID(insertedId).then(subject => {
+                            //                 //     resolve(subject);
+                            //                 // })
+                            //              })
                                         
-                                    }
-                                });
+                            //         }
+                            //     });
                         })
                         .catch(err => {
                             reject(err);
                         })
-                    // console.log("rows----", rows)
-                    // resolve(rows)
+                    console.log("rows----", rows)
+                    resolve(rows)
                 })
         })
 
@@ -92,7 +92,7 @@ class QuestionService {
                     if (err) {
                         reject(err);
                     } else {
-                        let questions;
+                        let questions= []
                         if (data && data.length > 0) {
                             questions = data.map(item => {
                                 let question;
@@ -119,6 +119,7 @@ class QuestionService {
                     } else {
                         let questions;
                         if (data && data.length > 0) {
+                            console.log("data----", data)
                             questions = data.map(item => {
                                 let question;
                                 question = new Question(item);
