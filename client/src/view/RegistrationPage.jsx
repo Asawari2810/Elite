@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import Proptypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import { Email, LockOutlined } from "@material-ui/icons";
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-// import { Link } from 'react-router-dom';
-// import { ClipLoader } from 'react-spinners';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import bgimage from "../assets/img/register.jpeg";
 
 import CustomInput from "../components/CustomInput/CustomInput.jsx";
 import Button from '../components/CustomButtons/Button.jsx';
@@ -33,6 +28,20 @@ class RegistrationPage extends Component {
         }
     }
 
+    handleSubmit = (values, history) => {
+        let value = {
+            first_name: values.first_name,
+            last_name: values.last_name,
+            email: values.email,
+            password: values.password,
+            mobile_no: values.mobile_no,
+            role: 'user',
+           // isActive: 0
+        }
+        this.props.signUp(value, history)
+
+    }
+
     render() {
         const { classes } = this.props;
         return (
@@ -47,13 +56,14 @@ class RegistrationPage extends Component {
                                     last_name: '',
                                     email: '',
                                     password: '',
+                                    mobile_no: null,
                                     confirmPassword: ''
                                 }}
                                 validationSchema={registrationSchema}
                                 onSubmit={values => {
-                                    this.props.signUp(values, this.props.history)
+                                    this.handleSubmit(values, this.props.history)
                                 }}
-                                render={({ handleSubmit, handleChange, values, errors }) => (
+                                render={({ handleSubmit, handleChange, values, errors, touched }) => (
 
                                     <Card register>
                                         <CardHeader
@@ -68,57 +78,58 @@ class RegistrationPage extends Component {
                                                 onChange={handleChange}
                                                 labelText="First Name"
                                                 name="first_name"
+                                                id="first_name"
                                                 value={values.first_name}
                                                 formControlProps={{
                                                     fullWidth: true
                                                 }}
-                                            // inputProps={{
-
-                                            //     type: "text",
-                                            //     endAdornment: (
-                                            //         <InputAdornment position="end">
-                                            //             <TextField className={classes.inputAdornmentIcon} />
-                                            //         </InputAdornment>
-                                            //     )
-                                            // }}
                                             />
+                                            {errors.first_name && touched.first_name ? (
+                                <div style={{ color: "red" }}>{errors.first_name}</div>
+                            ) : null}
                                             <CustomInput
                                                 onChange={handleChange}
                                                 labelText="Last Name"
                                                 name="last_name"
+                                                id="last_name"
                                                 value={values.last_name}
                                                 formControlProps={{
                                                     fullWidth: true
                                                 }}
-                                            // inputProps={{
-
-                                            //     type: "text",
-                                            //     endAdornment: (
-                                            //         // <InputAdornment position="end">
-                                            //         //     <TextField className={classes.inputAdornmentIcon} />
-                                            //         // </InputAdornment>
-                                            //     )
-                                            // }}
                                             />
-
+                                                {errors.last_name && touched.last_name ? (
+                                <div style={{ color: "red" }}>{errors.last_name}</div>
+                            ) : null}
                                             <CustomInput
                                                 onChange={handleChange}
                                                 labelText="Email"
                                                 name="email"
+                                                id="email"
                                                 value={values.email}
                                                 formControlProps={{
                                                     fullWidth: true
                                                 }}
                                                 inputProps={{
-
-                                                    type: "email",
-                                                    endAdornment: (
-                                                        <InputAdornment position="end">
-                                                            <Email className={classes.inputAdornmentIcon} />
-                                                        </InputAdornment>
-                                                    )
+                                                    type: 'email'
                                                 }}
                                             />
+                                            {errors.email && touched.email ? (
+                                <div style={{ color: "red" }}>{errors.email}</div>
+                            ) : null}
+                                            <CustomInput
+                                                onChange={handleChange}
+                                                labelText="Mobile"
+                                                name="mobile_no"
+                                                id="mobile_no"
+                                                value={values.mobile_no}
+                                                formControlProps={{
+                                                    fullWidth: true
+                                                }}
+                                               
+                                            />
+                                            {errors.mobile_no && touched.mobile_no ? (
+                                <div style={{ color: "red" }}>{errors.mobile_no}</div>
+                            ) : null}
                                             <CustomInput
                                                 labelText="Password"
                                                 onChange={handleChange}
@@ -129,16 +140,12 @@ class RegistrationPage extends Component {
                                                     fullWidth: true
                                                 }}
                                                 inputProps={{
-                                                    type: "password",
-                                                    endAdornment: (
-                                                        <InputAdornment position="end">
-                                                            <LockOutlined
-                                                                className={classes.inputAdornmentIcon}
-                                                            />
-                                                        </InputAdornment>
-                                                    )
+                                                    type:"password"
                                                 }}
                                             />
+                                            {errors.password && touched.password ? (
+                                <div style={{ color: "red" }}>{errors.password}</div>
+                            ) : null}
                                             <CustomInput
                                                 labelText="Confirm Password"
                                                 onChange={handleChange}
@@ -149,16 +156,12 @@ class RegistrationPage extends Component {
                                                     fullWidth: true
                                                 }}
                                                 inputProps={{
-                                                    type: "password",
-                                                    endAdornment: (
-                                                        <InputAdornment position="end">
-                                                            <LockOutlined
-                                                                className={classes.inputAdornmentIcon}
-                                                            />
-                                                        </InputAdornment>
-                                                    )
+                                                    type:"password"
                                                 }}
                                             />
+                                            {errors.confirmPassword && touched.confirmPassword ? (
+                                <div style={{ color: "red" }}>{errors.confirmPassword}</div>
+                            ) : null}
                                             <div>
                                             </div>
                                             <div className={classes.textCenter}>
@@ -186,8 +189,9 @@ RegistrationPage.propTypes = {
 };
 
 const registrationSchema = Yup.object().shape({
-    first_name: Yup.string().required('Please enter FirstName'),
-    last_name: Yup.string().required('Please enter LastName'),
+    first_name: Yup.string().required('Please enter First Name'),
+    last_name: Yup.string().required('Please enter Last Name'),
+   // mobile_no: Yup.number().min(10, 'Please enter 10 digits').max(10, 'Please enter 10 digits'),
     email: Yup.string().email('Invalid Email').required('Please enter Email id'),
     password: Yup.string().min(2, 'Password length is too small').required('Please enter Password'),
     confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], "Passwords must match").required('Password is required')

@@ -1,6 +1,8 @@
 import Auth from '../layouts/auth.jsx';
 import Dashboard from '../layouts/dashboard.jsx';
 import AdminDashboard from '../layouts/adminDashboard';
+import EmailConfirmation from '../view/EmailConfirmation';
+import EmailActivation from '../view/EmailActivation';
 
 var  indexRoutes = [
     { path: '/admin/courses', component: AdminDashboard},
@@ -11,6 +13,9 @@ var  indexRoutes = [
 
     {path : '/login', name: 'Auth' ,component : Auth },
     {path : '/register' , name :'Auth' , component : Auth},
+    {path: '/mailsent', name: 'Email confirmation', component: EmailConfirmation},
+    {path: '/verifymail', name: 'Email verification', component: EmailActivation},
+
     {path : '/dashboard' , name : 'Dashboard', component : Dashboard },
     { path: '/groups', name: 'Dashboard', component: Dashboard},
     { path: '/modalList/:id', name: 'Dashboard', component: Dashboard},

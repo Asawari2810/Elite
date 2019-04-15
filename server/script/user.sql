@@ -14,3 +14,10 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+set @query = IF(
+    @exist_column < 1, -- column does not exist
+    'ALTER TABLE user ADD CONSTRAINT email UNIQUE (email);', -- insert column first
+    'select \'Column Exists\' status' -- else just do meaningless select
+);
+prepare stmt from @query;
+EXECUTE stmt;
