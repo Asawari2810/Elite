@@ -1,10 +1,23 @@
 const userService = require('../service/userService');
+const sgMail = require('@sendgrid/mail');
 
 class userController{
 
     static getUserById(id){    
     }
 
+    static sendMail(req, res) {
+        sgMail.setApiKey('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');
+        const msg = {
+        to: 'surbhiairan1@gmail.com',
+        from: 'surbhiairan@gmail.com',
+        subject: 'Sending with SendGrid is Fun',
+        text: 'and easy to do anywhere, even with Node.js',
+        html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+        };
+        sgMail.send(msg);
+        res.send("All ok")
+    }
 
     static addUser(req,res){
         let user = req.body;

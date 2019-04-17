@@ -9,7 +9,7 @@ import { fetchGroups } from '../actions/groups.action';
 import Card from "../components/Card/Card.jsx";
 import CardBody from '../components/Card/CardBody.jsx';
 import CardHeader from "../components/Card/CardHeader.jsx";
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
@@ -52,18 +52,6 @@ class Groups extends Component {
             )
         }
 
-        // if(groupsDetails && groupsDetails.groups) {
-        //     return(
-        //     groupsDetails.groups.map((data,index) => {
-        //         return (
-        //             <div >
-        //                 <h1>{data.name}</h1>
-        //             </div>
-        //         )
-        //     })
-        // )
-        // }
-
         return (
             groupsDetails.map((data, index) => {
                 return (
@@ -73,31 +61,28 @@ class Groups extends Component {
                                 className={`${classes.cardHeader} ${classes.textCenter}`}
                                 color="rose"
                             >
-                                <h2 className={classes.cardTitle}> {data.name}</h2>
+                                <h2 className={classes.cardTitle}> {data.group.groupName}</h2>
                             </CardHeader>
                             <CardBody>
-                                
-                                    {data.subjects.map((subject, index) => {
-                                        return (
-                                            <div>
-                                                <Typography>
-                                                <label><h4>{subject.name}</h4></label>
-                                                <Link to={`/modalList/${subject.subject_id}`}>
+                                {data.subjects.map((subject, index) => {
+                                    return (
+                                        <div>
+                                            <Typography>
+                                                <label><h4>{subject.subjectName}</h4></label>
+                                                <Link to={`/modalList/${subject.subjectId}`}>
                                                     <h4>Modal Paper</h4>
                                                 </Link>
                                                 <Link to='/ChapterTest'>
                                                     <h4>Chapter Test</h4>
                                                 </Link>
-                                                <Link to={`/fullTestList/${subject.subject_id}`}>
+                                                <Link to={`/fullTestList/${subject.subjectId}`}>
                                                     <h4>Full Test</h4>
                                                 </Link>
 
-                                                </Typography>
-                                            </div>
-                                        )
-                                    })}
-                                
-                                
+                                            </Typography>
+                                        </div>
+                                    )
+                                })}
                             </CardBody>
                         </Card>
                     </div>

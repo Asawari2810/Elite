@@ -1,5 +1,6 @@
 import { auth } from '../constants/Auth.constants.jsx';
 import { API_ROOT, URI } from '../config/config';
+import { StringFormat } from '../utils/StringFormat';
 
 export const register = (values, history) => {
     return (dispatch) => {
@@ -73,6 +74,42 @@ export function loginUser (values,history) {
 
     }
 
+}
+
+export const activateUser = (id) => {
+    fetch(StringFormat(API_ROOT + URI.ACTIVATE_USER, id), {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({})
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log("data", data)
+    })
+    .catch(err => {
+        console.log("error-", err)
+    })
+}
+
+export const sendForgotPasswordLink = (email, history) => {
+    fetch(StringFormat(API_ROOT + URI.RESET_PASSWORD_LINK), {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({email: email})
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log("data", data);
+        alert('Link has been sent to your email.')
+        //history.push('')
+    })
+    .catch(err => {
+        console.log("error-", err)
+    })
 }
 
 export function logout(){

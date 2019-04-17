@@ -22,16 +22,9 @@ export const fetchGroups = (course_id, history) => {
             .then(res => res.json())
             .then(data => {
                 console.log("groups dta", data);
-                // if(data.detail === 'Signature has expired.') {
-                //     dispatch({
-                //         type: collection.MY_COLLECTION_FAILURE,
-                //         payload: data
-                //     })
-                //      return history.push('/login')
-                // }
                 dispatch({
                     type: groups.GROUPS_SUCCESS,
-                    payload: data.groups
+                    payload: data
                 })
             })
             .catch(err => {
