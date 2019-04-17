@@ -26,6 +26,7 @@ var  indexRoutes = [
     { path: '/fullTestList/:id', name: 'Dashboard', component: Dashboard},
     { path: '/fullTest/:subId', name: 'Dashboard', component: Dashboard},
     { path: '/fullTestSubmitScore', name: 'Dashboard', component: Dashboard},
+    { path: '/fullTestInstructions/:id/:subId', name: 'Dashboard', component: Dashboard},
     {path : '/' , name:'Auth' , component : Auth}
 ];
 
