@@ -9,7 +9,8 @@ class EmailGun{
 
     static sendEmail(content,to,subject){
         // hard coded temporarily
-        sgMail.setApiKey('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');
+        //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
+        sgMail.setApiKey('');
         const msg = {
             to: to,
             from: 'surbhiairan@gmail.com',
