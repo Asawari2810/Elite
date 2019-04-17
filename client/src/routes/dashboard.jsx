@@ -99,7 +99,7 @@ export const otherRoutes = [
     },
     {
         path: '/fullTestInstructions/:id/:subId',
-        component : FullTestSubmitScore, 
+        component : FullTestInstructions, 
         name: 'Results'
     }
 
