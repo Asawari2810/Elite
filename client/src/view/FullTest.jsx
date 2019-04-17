@@ -46,33 +46,33 @@ class FullTest extends Component {
             selectedValue: [],
             totalScore: 0,
             time: {}, 
-            seconds: 5 
+            seconds: 3600 
 
         };
-        // this.timer = 0;
-        // this.startTimer = this.startTimer.bind(this);
-        //this.countDown = this.countDown.bind(this);
+        this.timer = 0;
+        this.startTimer = this.startTimer.bind(this);
+        this.countDown = this.countDown.bind(this);
         //this.handleClick = this.handleClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    // secondsToTime(secs){
-    //     let hours = Math.floor(secs / (60 * 60));
+    secondsToTime(secs){
+        let hours = Math.floor(secs / (60 * 60));
     
-    //     let divisor_for_minutes = secs % (60 * 60);
-    //     let minutes = Math.floor(divisor_for_minutes / 60);
+        let divisor_for_minutes = secs % (60 * 60);
+        let minutes = Math.floor(divisor_for_minutes / 60);
     
-    //     let divisor_for_seconds = divisor_for_minutes % 60;
-    //     let seconds = Math.ceil(divisor_for_seconds);
+        let divisor_for_seconds = divisor_for_minutes % 60;
+        let seconds = Math.ceil(divisor_for_seconds);
     
-    //     let obj = {
-    //       "h": hours,
-    //       "m": minutes,
-    //       "s": seconds
-    //     };
-    //     return obj;
-    //   }
+        let obj = {
+          "h": hours,
+          "m": minutes,
+          "s": seconds
+        };
+        return obj;
+      }
     
     handleClick(event) {
 
@@ -124,31 +124,33 @@ class FullTest extends Component {
 
     componentDidMount() {
         
-        // let timeLeftVar = this.secondsToTime(this.state.seconds);
-        // this.setState({ time: timeLeftVar });
+        let timeLeftVar = this.secondsToTime(this.state.seconds);
+        this.setState({ time: timeLeftVar });
         console.log("componet did mount full test"+this.props.match.params);
         this.props.fetchFullTest(this.props.match.params, this.props.history);
     }
 
-    // startTimer() {
-    //     if (this.timer == 0 && this.state.seconds > 0) {
-    //       this.timer = setInterval(this.countDown, 1000);
-    //     }
-    //   }
+    startTimer() {
+        console.log("inside start timer");
+        if (this.timer == 0 && this.state.seconds > 0) {
+          this.timer = setInterval(this.countDown, 1000);
+        }
+      }
     
-    //   countDown() {
-    //     // Remove one second, set state so a re-render happens.
-    //     let seconds = this.state.seconds - 1;
-    //     this.setState({
-    //       time: this.secondsToTime(seconds),
-    //       seconds: seconds,
-    //     });
+      countDown() {
+        // Remove one second, set state so a re-render happens.
+        let seconds = this.state.seconds - 1;
+        this.setState({
+          time: this.secondsToTime(seconds),
+          seconds: seconds,
+        });
         
-    //     // Check if we're at zero.
-    //     if (seconds == 0) { 
-    //       clearInterval(this.timer);
-    //     }
-    //   }
+        // Check if we're at zero.
+        if (seconds == 0) { 
+          clearInterval(this.timer);
+          alert("Time's up!!!!")
+        }
+      }
 
     render() {
 
@@ -207,9 +209,11 @@ class FullTest extends Component {
             //         </ul>
             //     );
             // });
-
+            this.startTimer();
             return (
                 <div>
+                   {/* <button onClick={this.startTimer}> Click Me</button> */}
+                   m: {this.state.time.m} s: {this.state.time.s}
                     <Grid container >
                         {fullTestDetails.map((question, index) => {
                             return (
