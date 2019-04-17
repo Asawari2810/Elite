@@ -35,7 +35,7 @@ class SubjectController {
     }
 
     static getChapterBySubjectID(req,res){
-        console.log("over here----", req.query)
+        //console.log("over here----", req.query)
         let id = req.params['subjectId']
         subjectService.getChapterBySubjectID(id).then( (chapter ) =>{
             res.send(chapter);

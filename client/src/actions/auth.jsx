@@ -93,6 +93,25 @@ export const activateUser = (id) => {
     })
 }
 
+export const sendForgotPasswordLink = (email, history) => {
+    fetch(StringFormat(API_ROOT + URI.RESET_PASSWORD_LINK), {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({email: email})
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log("data", data);
+        alert('Link has been sent to your email.')
+        //history.push('')
+    })
+    .catch(err => {
+        console.log("error-", err)
+    })
+}
+
 export function logout(){
     localStorage.clear();
     //history.push('main');

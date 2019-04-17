@@ -20,8 +20,8 @@ import GridItem from '../components/Grid/GridItem';
 import CardHeader from "../components/Card/CardHeader.jsx";
 
 class LoginPage extends Component {
-  moveToRegistration = () => {
-    this.props.history.push('/register')
+  moveToForgetPassword = () => {
+    this.props.history.push('/forgotpassword')
   }
 
   render() {
@@ -96,8 +96,8 @@ class LoginPage extends Component {
                        
                      
                         
-                        <Button color="rose" round onClick={this.moveToRegistration}>
-                          Sign Up
+                        <Button color="rose" round onClick={this.moveToForgetPassword}>
+                          Forget Password
                         </Button>
 
                       </div>

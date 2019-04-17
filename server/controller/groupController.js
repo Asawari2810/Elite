@@ -45,18 +45,6 @@ class GroupController {
             }) 
         }
     }
-
-    // static getSubjectAlongGroups(req,res){
-    //     let query = req.query['subjectId']
-    //     console.log("query---", query)
-    //     groupService.getSubjectAlongGroups().then( (group ) =>{
-    //         res.send(group);
-    //     })
-    //     .catch(err => {
-    //         res.status(500);
-    //         res.send(err);
-    //     }) 
-    // }
 }
 
 module.exports = GroupController;

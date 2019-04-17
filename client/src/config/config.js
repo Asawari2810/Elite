@@ -19,6 +19,7 @@ export const URI = {
     LOGIN: 'user/authenticate',
     REGISTRATION: 'user',
     ACTIVATE_USER: 'user/{0}/activateUser',
-
+    RESET_PASSWORD_LINK: 'user/resetPasswordLink',
+    
     UPLOAD: 'question'
 }

@@ -51,7 +51,7 @@ class EmailGun{
     }
 
     static sendPasswordResetLink(id,email){
-        const subject = "Password Reset Link :: Post Curve";
+        const subject = "Password Reset Link :: Elite";
         let template = EmailTemplate.getPasswordResetLinkTemplete(id,email);
         return EmailGun.sendEmail(template,email,subject);
     }

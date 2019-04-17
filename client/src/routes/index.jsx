@@ -3,6 +3,8 @@ import Dashboard from '../layouts/dashboard.jsx';
 import AdminDashboard from '../layouts/adminDashboard';
 import EmailConfirmation from '../view/EmailConfirmation';
 import EmailActivation from '../view/EmailActivation';
+import ForgotPassword from '../view/ForgotPassword';
+import ResetPassword from '../view/ResetPassword';
 
 var  indexRoutes = [
     { path: '/admin/courses', component: AdminDashboard},
@@ -15,6 +17,8 @@ var  indexRoutes = [
     {path : '/register' , name :'Auth' , component : Auth},
     {path: '/mailsent', name: 'Email confirmation', component: EmailConfirmation},
     {path: '/verifymail', name: 'Email verification', component: EmailActivation},
+    { path: '/forgotpassword', name: 'Forgot password', component: ForgotPassword},
+    {path: '/resetpassword', name: 'Reset Password', component: ResetPassword},
 
     {path : '/dashboard' , name : 'Dashboard', component : Dashboard },
     { path: '/groups', name: 'Dashboard', component: Dashboard},
