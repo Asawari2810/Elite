@@ -6,6 +6,7 @@ import ModalPaperList from '../view/ModalPaperList';
 import FullTestList from '../view/FullTestList';
 import FullTest from '../view/FullTest';
 import FullTestSubmitScore from '../view/FullTestSubmitScore';
+import FullTestInstructions from '../view/FullTestInstructions';
 
 
 import Courses from '../admin/views/Courses';
@@ -93,6 +94,11 @@ export const otherRoutes = [
     },
     {
         path: '/fullTestSubmitScore',
+        component : FullTestSubmitScore, 
+        name: 'Results'
+    },
+    {
+        path: '/fullTestInstructions/:id/:subId',
         component : FullTestSubmitScore, 
         name: 'Results'
     }
