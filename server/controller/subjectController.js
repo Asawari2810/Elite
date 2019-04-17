@@ -33,6 +33,18 @@ class SubjectController {
             res.send(err);
         }) 
     }
+
+    static getChapterBySubjectID(req,res){
+        console.log("over here----", req.query)
+        let id = req.params['subjectId']
+        subjectService.getChapterBySubjectID(id).then( (chapter ) =>{
+            res.send(chapter);
+        })
+        .catch(err => {
+            res.status(500);
+            res.send(err);
+        }) 
+    }
 }
 
 module.exports = SubjectController;

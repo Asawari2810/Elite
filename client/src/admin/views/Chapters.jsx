@@ -5,7 +5,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { fetchChapters, addChapter } from '../admin.action';
+import { fetchChapters, addChapter, uploadFile } from '../admin.action';
 import Card from "../../components/Card/Card.jsx";
 import CardBody from '../../components/Card/CardBody.jsx';
 import CardHeader from "../../components/Card/CardHeader.jsx";
@@ -31,9 +31,10 @@ const styles = theme => ({
 class AdminSubjects extends Component {
 
 state = {
+    file: null,
     addChapter: false,
-    course_name: null,
-    subject_name: null,
+    chapter_name: null,
+    chapter_name: null,
 }
 
 componentDidMount() {
@@ -45,24 +46,49 @@ handleAddChapter = () => {
     this.setState({ addChapter: true })
 }
 
-handleSubmitChapter = (course_id) => {
+handleSubmitChapter = (subject_id) => {
     let values = {
-        subject_name: this.state.subject_name,
-        course_id: course_id
+        chapter_name: this.state.chapter_name,
+        subject_id: subject_id
     }
     this.props.addChapter(values, this.props.history);
+}
+
+handleFileChange(e) {
+    e.preventDefault();
+    let reader = new FileReader();
+    console.log("path ", e.target.files)
+    let file = e.target.files[0];
+    //console.log("files---", file)
+    //this.setState({file: file})
+    reader.onloadend = () => {
+      this.setState({
+        file: reader.result,
+      });
+    };
+    reader.readAsDataURL(file);
+  }
+
+uploadFileHandler = (subjectId, chapterId) => {
+    console.log(this.state.file,"gilnlvndsv");
+    let values = {
+        file: this.state.file,
+        subject_id: subjectId,
+        chapter_id: chapterId
+    }
+    this.props.uploadFile(values, this.props.history);
 }
 
 render() {
 
     const {
         classes,
-        subjectsList,
-        subjectsLoading,
-        subjectsError
+        chaptersList,
+        chaptersLoading,
+        chaptersError
     } = this.props;
 
-    const { course_id } = this.props.match.params;
+    const { subject_id } = this.props.match.params;
 
     return (
         <div>
@@ -71,16 +97,16 @@ render() {
                 ?
                 (<div>
                     <TextField
-                                id="subject_name"
+                                id="chapter_name"
                                 label="Title"
                                 className={classes.textField}
                                 type="text"
-                                name="subject_name"
+                                name="chapter_name"
                                 margin="normal"
                                 variant="outlined"
-                                onChange={(e) => this.setState({ subject_name: e.target.value})}
+                                onChange={(e) => this.setState({ chapter_name: e.target.value})}
                     />
-                    <Button className={classes.button} variant="contained" color="primary" onClick={()=>this.handleSubmitChapter(course_id)}>
+                    <Button className={classes.button} variant="contained" color="primary" onClick={()=>this.handleSubmitChapter(subject_id)}>
                         Submit
                     </Button>
                 </div>) :
@@ -92,24 +118,23 @@ render() {
             }
 
 
-            {subjectsLoading ? <CircularProgress className={classes.progress} /> : null}
-            {subjectsError ? <div><h6>Hard luck</h6></div> : null}
-            {subjectsList.length>0 ? 
+            {chaptersLoading ? <CircularProgress className={classes.progress} /> : null}
+            {chaptersError ? <div><h6>Hard luck</h6></div> : null}
+            {chaptersList.length>0 ? 
             <div>
                 <h4>All Chapters</h4>
                 {
-                    subjectsList.map((data, index) => {
+                    chaptersList.map((data, index) => {
                         return (
                             <div >
                                 <Card >
-                                    <CardHeader onClick={() => this.onChapterClick(data.id)}
+                                    <CardHeader 
                                         className={`${classes.cardHeader} ${classes.textCenter}`}
                                     >
-                                        <h2 className={classes.cardTitle}> {data.subjectName}</h2>
-                                    <Link to={`/admin/chapter/${data.id}`}>
-                                        Chapters
-                                    </Link>
+                                        <h2 className={classes.cardTitle}> {data.chapterName}</h2>
                                     </CardHeader>
+                                    <input type="file" onChange={ e => this.handleFileChange(e)} ref="fileInput" />
+                                    <Button onClick={()=>this.uploadFileHandler(subject_id, data.id)}>Upload Excel Sheet</Button>
                                 </Card>
                             </div>
                         )
@@ -125,16 +150,17 @@ render() {
 
 const mapStateToProps = (state) => {
     return {
-        subjectsList: state.admin.subjectsList,
-        subjectsLoading: state.admin.subjectsLoading,
-        subjectsError: state.admin.subjectsError
+        chaptersList: state.admin.chaptersList,
+        chaptersLoading: state.admin.chaptersLoading,
+        chaptersError: state.admin.chaptersError
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchChapters: (subject_id, history) => dispatch(fetchChapters(subject_id, history)),
-        addChapter: (values, history) => dispatch(addChapter(values, history))
+        addChapter: (values, history) => dispatch(addChapter(values, history)),
+        uploadFile: (subjectId, chapterId, values, history) => dispatch(uploadFile(subjectId, chapterId, values, history))
     }
 }
 

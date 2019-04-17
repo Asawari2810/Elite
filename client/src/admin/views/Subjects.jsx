@@ -37,8 +37,8 @@ state = {
 }
 
 componentDidMount() {
-    const { course_id } = this.props.match.params;
-    this.props.fetchSubjects(course_id, this.props.history);
+    const { group_id } = this.props.match.params;
+    this.props.fetchSubjects(group_id, this.props.history);
 }
 
 handleAddSubject = () => {
@@ -102,12 +102,12 @@ render() {
                         return (
                             <div >
                                 <Card >
-                                    <CardHeader onClick={() => this.onSubjectClick(data.id)}
+                                    <CardHeader 
                                         className={`${classes.cardHeader} ${classes.textCenter}`}
                                     >
                                         <h2 className={classes.cardTitle}> {data.subjectName}</h2>
-                                    <Link to={`/admin/subject/${data.id}`}>
-                                        Subjects
+                                    <Link to={`/admin/chapter/${data.id}`}>
+                                        Chapters
                                     </Link>
                                     </CardHeader>
                                 </Card>
@@ -133,7 +133,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchSubjects: (history) => dispatch(fetchSubjects(history)),
+        fetchSubjects: (group_id, history) => dispatch(fetchSubjects(group_id, history)),
         addSubject: (values, history) => dispatch(addSubject(values, history))
     }
 }

@@ -23,6 +23,17 @@ class ChapterController {
             res.send(err);
         }) 
     }
+
+    // static getChapterBySubjectID(req,res){
+    //     let id = req.params['subjectId']
+    //     chapterService.getChapterBySubjectID(id).then( (chapter ) =>{
+    //         res.send(chapter);
+    //     })
+    //     .catch(err => {
+    //         res.status(500);
+    //         res.send(err);
+    //     }) 
+    // }
 }
 
 module.exports = ChapterController;
